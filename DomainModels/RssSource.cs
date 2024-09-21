@@ -10,6 +10,6 @@
         public string Link { get; set; }
         public string Author { get; set; }
         public string PubDate { get; set; }
-        public List<string> UrlToImage { get; set; }
+        public ICollection<UrlToImageConfig> UrlToImagescConfigs { get; set; }
     }
 }

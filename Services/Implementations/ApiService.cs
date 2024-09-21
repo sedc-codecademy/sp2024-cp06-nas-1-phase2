@@ -33,7 +33,7 @@ namespace Services.Implementations
                     Link = "link",
                     Author = "author",
                     PubDate = "pubDate",
-                    UrlToImage = new List<string> { "enclosure", "url" }
+                    //UrlToImage = new List<string> { "enclosure", "url" }
                 }//,
                 //new UrlConfig
                 //{
@@ -112,7 +112,7 @@ namespace Services.Implementations
             return allArticles;
         }
 
-        private async Task<string> FetchRssFeedXmlAsync(string feedUrl)
+        private static async Task<string> FetchRssFeedXmlAsync(string feedUrl)
         {
             using (var httpClient = new HttpClient())
             {
@@ -152,7 +152,7 @@ namespace Services.Implementations
                         Link = GetElementValue(item, urlConfig.Link),
                         Author = GetElementValue(item, urlConfig.Author),
                         PubDate = GetElementValue(item, urlConfig.PubDate),
-                        UrlToImage = ExtractImageUrl(item, urlConfig.UrlToImage)
+                        //UrlToImage = ExtractImageUrl(item, urlConfig.UrlToImage)
                     };
                     articles.Add(article);
                 }
@@ -165,7 +165,7 @@ namespace Services.Implementations
             return articles;
         }
 
-        private string GetElementValue(XElement parent, string tagName)
+        private static string GetElementValue(XElement parent, string tagName)
         {
             if (tagName == "")
             {
@@ -176,7 +176,7 @@ namespace Services.Implementations
             return element?.Value.Trim() ?? string.Empty;
         }
 
-        private XElement FindElementByTagName(XElement parent, string tagName)
+        private static XElement FindElementByTagName(XElement parent, string tagName)
         {
             if (tagName.Contains(":"))
             {
@@ -192,7 +192,7 @@ namespace Services.Implementations
             }
         }
 
-        private bool IsValidRegex(string pattern)
+        private static bool IsValidRegex(string pattern)
         {
             if (string.IsNullOrWhiteSpace(pattern))
             {
@@ -235,7 +235,7 @@ namespace Services.Implementations
             return false;
         }
 
-        private string ExtractImageUrl(XElement parent, List<string> imageTags)
+        private string ExtractImageUrl(XElement parent, IReadOnlyList<string> imageTags)
         {
             //Regex for UrlToImage!!
             //var checkRegex = new Regex(imageTags[1]);
@@ -303,7 +303,7 @@ namespace Services.Implementations
             return string.Empty;
         }
 
-        private string StripHtmlTags(string text, List<string> allowedTags = null)
+        private static string StripHtmlTags(string text, List<string> allowedTags = null)
         {
             if (allowedTags == null || allowedTags.Count == 0)
             {
@@ -315,7 +315,7 @@ namespace Services.Implementations
             return regex.Replace(text, string.Empty);
         }
 
-        private string RemoveScriptTags(string xmlData)
+        private static string RemoveScriptTags(string xmlData)
         {
             return Regex.Replace(xmlData, "<script.*?</script>", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         }

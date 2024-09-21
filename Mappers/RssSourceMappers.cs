@@ -18,7 +18,7 @@ namespace Mappers
                 Author = rssSourceDto.Author,
                 PubDate = rssSourceDto.PubDate,
                 //UrlToImageList = rssSourceDto.UrlToImageList,
-                UrlToImage = rssSourceDto.UrlToImage,
+                //UrlToImage = rssSourceDto.UrlToImage,
             };
         }
         public static RssSourceDto ToRssSourceDto(this RssSource rssSourceDto)
@@ -34,7 +34,7 @@ namespace Mappers
                 Author = rssSourceDto.Author,
                 PubDate = rssSourceDto.PubDate,
                 //UrlToImageList = rssSourceDto.UrlToImageList,
-                UrlToImage = rssSourceDto.UrlToImage,
+                //UrlToImage = rssSourceDto.UrlToImage,
             };
         }
     }

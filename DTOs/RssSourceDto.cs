@@ -1,6 +1,4 @@
-﻿using DomainModels;
-
-namespace DTOs
+﻿namespace DTOs
 {
     public class RssSourceDto
     {

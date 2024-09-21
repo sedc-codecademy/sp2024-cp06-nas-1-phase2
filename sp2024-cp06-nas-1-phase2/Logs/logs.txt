@@ -1,0 +1,524 @@
+2024-09-21 23:03:52.902 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:04:40.947 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:18:14.451 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:18:45.021 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:19:45.991 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:19:46.654 +02:00 [INF] Entity Framework Core 6.0.33 initialized 'NewsAggregatorDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.33' with options: None
+2024-09-21 23:19:46.833 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.835 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.836 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.837 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.838 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.857 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.858 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.859 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.860 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.861 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:19:46.878 +02:00 [DBG] DetectChanges starting for 'NewsAggregatorDbContext'.
+2024-09-21 23:19:46.886 +02:00 [DBG] DetectChanges completed for 'NewsAggregatorDbContext'.
+2024-09-21 23:19:46.920 +02:00 [DBG] Executing 5 update commands as a batch.
+2024-09-21 23:19:46.924 +02:00 [DBG] Executing 5 update commands as a batch.
+2024-09-21 23:19:47.000 +02:00 [DBG] 'NewsAggregatorDbContext' disposed.
+2024-09-21 23:20:10.316 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:20:10.987 +02:00 [INF] Entity Framework Core 6.0.33 initialized 'NewsAggregatorDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.33' with options: None
+2024-09-21 23:20:11.057 +02:00 [DBG] Migrating using database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.064 +02:00 [DBG] Opening connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.339 +02:00 [DBG] Opened connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.348 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.354 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (7ms).
+2024-09-21 23:20:11.363 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:20:11.383 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:20:11.385 +02:00 [DBG] Closing connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.389 +02:00 [DBG] Closed connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.394 +02:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2024-09-21 23:20:11.394 +02:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2024-09-21 23:20:11.394 +02:00 [DBG] Opening connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.395 +02:00 [DBG] Opened connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.395 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-09-21 23:20:11.412 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-09-21 23:20:11.412 +02:00 [DBG] Closing connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.412 +02:00 [DBG] Closed connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.413 +02:00 [DBG] Opening connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.413 +02:00 [DBG] Opened connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.413 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.413 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.413 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:20:11.415 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:20:11.415 +02:00 [DBG] Closing connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.415 +02:00 [DBG] Closed connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.415 +02:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2024-09-21 23:20:11.415 +02:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2024-09-21 23:20:11.415 +02:00 [DBG] Opening connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.415 +02:00 [DBG] Opened connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.415 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-09-21 23:20:11.416 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-09-21 23:20:11.416 +02:00 [DBG] Closing connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.416 +02:00 [DBG] Closed connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.431 +02:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2024-09-21 23:20:11.431 +02:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2024-09-21 23:20:11.431 +02:00 [DBG] Opening connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.431 +02:00 [DBG] Opened connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.432 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-09-21 23:20:11.455 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-09-21 23:20:11.456 +02:00 [DBG] A data reader was disposed.
+2024-09-21 23:20:11.456 +02:00 [DBG] Closing connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.456 +02:00 [DBG] Closed connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.466 +02:00 [INF] Applying migration '20240921211946_init'.
+2024-09-21 23:20:11.527 +02:00 [DBG] Opening connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.528 +02:00 [DBG] Opened connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.529 +02:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2024-09-21 23:20:11.534 +02:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2024-09-21 23:20:11.535 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.535 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.535 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Articles] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [UrlToImage] nvarchar(max) NOT NULL,
+    [TrustScore] float NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_Articles] PRIMARY KEY ([Id])
+);
+2024-09-21 23:20:11.562 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Articles] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [UrlToImage] nvarchar(max) NOT NULL,
+    [TrustScore] float NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_Articles] PRIMARY KEY ([Id])
+);
+2024-09-21 23:20:11.563 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.563 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.563 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [RssSources] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_RssSources] PRIMARY KEY ([Id])
+);
+2024-09-21 23:20:11.569 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [RssSources] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_RssSources] PRIMARY KEY ([Id])
+);
+2024-09-21 23:20:11.569 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.569 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.569 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [UrlToImageConfig] (
+    [Id] int NOT NULL IDENTITY,
+    [RssSourceId] int NOT NULL,
+    [Query] nvarchar(max) NOT NULL,
+    [Attribute] nvarchar(max) NULL,
+    [Regex] nvarchar(max) NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_UrlToImageConfig] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UrlToImageConfig_RssSources_RssSourceId] FOREIGN KEY ([RssSourceId]) REFERENCES [RssSources] ([Id]) ON DELETE CASCADE
+);
+2024-09-21 23:20:11.575 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [UrlToImageConfig] (
+    [Id] int NOT NULL IDENTITY,
+    [RssSourceId] int NOT NULL,
+    [Query] nvarchar(max) NOT NULL,
+    [Attribute] nvarchar(max) NULL,
+    [Regex] nvarchar(max) NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_UrlToImageConfig] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UrlToImageConfig_RssSources_RssSourceId] FOREIGN KEY ([RssSourceId]) REFERENCES [RssSources] ([Id]) ON DELETE CASCADE
+);
+2024-09-21 23:20:11.575 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.575 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.575 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] ON;
+INSERT INTO [RssSources] ([Id], [Author], [CreatedOn], [Description], [FeedUrl], [Link], [ModifiedOn], [PubDate], [Source], [SourceUrl], [Title])
+VALUES (1, N'author', '2024-09-21T23:19:46.6819337+02:00', N'description', N'https://mia.mk/feed', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'MIA', N'https://mia.mk', N'title'),
+(2, N'dc:creator', '2024-09-21T23:19:46.6819395+02:00', N'content:encoded', N'https://telma.com.mk/feed/', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Telma', N'https://telma.com.mk', N'title'),
+(3, N'', '2024-09-21T23:19:46.6819399+02:00', N'content', N'https://admin.24.mk/api/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'24Vesti', N'https://24.mk', N'title'),
+(4, N'dc:creator', '2024-09-21T23:19:46.6819406+02:00', N'description', N'https://sitel.com.mk/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Sitel', N'https://sitel.com.mk', N'title'),
+(5, N'author', '2024-09-21T23:19:46.6819410+02:00', N'content', N'https://kanal5.com.mk/rss.aspx', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Kanal5', N'https://kanal5.com.mk', N'title');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] OFF;
+2024-09-21 23:20:11.629 +02:00 [INF] Executed DbCommand (53ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] ON;
+INSERT INTO [RssSources] ([Id], [Author], [CreatedOn], [Description], [FeedUrl], [Link], [ModifiedOn], [PubDate], [Source], [SourceUrl], [Title])
+VALUES (1, N'author', '2024-09-21T23:19:46.6819337+02:00', N'description', N'https://mia.mk/feed', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'MIA', N'https://mia.mk', N'title'),
+(2, N'dc:creator', '2024-09-21T23:19:46.6819395+02:00', N'content:encoded', N'https://telma.com.mk/feed/', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Telma', N'https://telma.com.mk', N'title'),
+(3, N'', '2024-09-21T23:19:46.6819399+02:00', N'content', N'https://admin.24.mk/api/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'24Vesti', N'https://24.mk', N'title'),
+(4, N'dc:creator', '2024-09-21T23:19:46.6819406+02:00', N'description', N'https://sitel.com.mk/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Sitel', N'https://sitel.com.mk', N'title'),
+(5, N'author', '2024-09-21T23:19:46.6819410+02:00', N'content', N'https://kanal5.com.mk/rss.aspx', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Kanal5', N'https://kanal5.com.mk', N'title');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] OFF;
+2024-09-21 23:20:11.629 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.629 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.629 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] ON;
+INSERT INTO [UrlToImageConfig] ([Id], [Attribute], [CreatedOn], [ModifiedOn], [Query], [Regex], [RssSourceId])
+VALUES (1, N'url', '2024-09-21T23:19:46.6819457+02:00', '0001-01-01T00:00:00.0000000', N'enclosure', NULL, 1),
+(2, NULL, '2024-09-21T23:19:46.6819466+02:00', '0001-01-01T00:00:00.0000000', N'content:encoded', N'<img[^>]*src=\"([^\"]*)\"', 2),
+(3, N'src', '2024-09-21T23:19:46.6819469+02:00', '0001-01-01T00:00:00.0000000', N'img', NULL, 3),
+(4, NULL, '2024-09-21T23:19:46.6819472+02:00', '0001-01-01T00:00:00.0000000', N'description', N'<img[^>]*src=\"([^\"]*)\"', 4),
+(5, NULL, '2024-09-21T23:19:46.6819475+02:00', '0001-01-01T00:00:00.0000000', N'thumbnail', NULL, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] OFF;
+2024-09-21 23:20:11.657 +02:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] ON;
+INSERT INTO [UrlToImageConfig] ([Id], [Attribute], [CreatedOn], [ModifiedOn], [Query], [Regex], [RssSourceId])
+VALUES (1, N'url', '2024-09-21T23:19:46.6819457+02:00', '0001-01-01T00:00:00.0000000', N'enclosure', NULL, 1),
+(2, NULL, '2024-09-21T23:19:46.6819466+02:00', '0001-01-01T00:00:00.0000000', N'content:encoded', N'<img[^>]*src=\"([^\"]*)\"', 2),
+(3, N'src', '2024-09-21T23:19:46.6819469+02:00', '0001-01-01T00:00:00.0000000', N'img', NULL, 3),
+(4, NULL, '2024-09-21T23:19:46.6819472+02:00', '0001-01-01T00:00:00.0000000', N'description', N'<img[^>]*src=\"([^\"]*)\"', 4),
+(5, NULL, '2024-09-21T23:19:46.6819475+02:00', '0001-01-01T00:00:00.0000000', N'thumbnail', NULL, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] OFF;
+2024-09-21 23:20:11.657 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.657 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.657 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UrlToImageConfig_RssSourceId] ON [UrlToImageConfig] ([RssSourceId]);
+2024-09-21 23:20:11.682 +02:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UrlToImageConfig_RssSourceId] ON [UrlToImageConfig] ([RssSourceId]);
+2024-09-21 23:20:11.682 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:20:11.682 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:20:11.682 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240921211946_init', N'6.0.33');
+2024-09-21 23:20:11.685 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240921211946_init', N'6.0.33');
+2024-09-21 23:20:11.686 +02:00 [DBG] Committing transaction.
+2024-09-21 23:20:11.689 +02:00 [DBG] Committed transaction.
+2024-09-21 23:20:11.690 +02:00 [DBG] Disposing transaction.
+2024-09-21 23:20:11.690 +02:00 [DBG] Closing connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.690 +02:00 [DBG] Closed connection to database 'LiquorStore' on server '.'.
+2024-09-21 23:20:11.691 +02:00 [DBG] 'NewsAggregatorDbContext' disposed.
+2024-09-21 23:25:10.925 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:25:11.543 +02:00 [INF] Entity Framework Core 6.0.33 initialized 'NewsAggregatorDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.33' with options: None
+2024-09-21 23:25:11.693 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.695 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.696 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.698 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.699 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'RssSource' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.721 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.723 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.724 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.725 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.726 +02:00 [DBG] Context 'NewsAggregatorDbContext' started tracking 'UrlToImageConfig' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-09-21 23:25:11.747 +02:00 [DBG] DetectChanges starting for 'NewsAggregatorDbContext'.
+2024-09-21 23:25:11.758 +02:00 [DBG] DetectChanges completed for 'NewsAggregatorDbContext'.
+2024-09-21 23:25:11.798 +02:00 [DBG] Executing 5 update commands as a batch.
+2024-09-21 23:25:11.801 +02:00 [DBG] Executing 5 update commands as a batch.
+2024-09-21 23:25:11.888 +02:00 [DBG] 'NewsAggregatorDbContext' disposed.
+2024-09-21 23:25:20.933 +02:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-09-21 23:25:21.507 +02:00 [INF] Entity Framework Core 6.0.33 initialized 'NewsAggregatorDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.33' with options: None
+2024-09-21 23:25:21.554 +02:00 [DBG] Migrating using database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:21.559 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:21.730 +02:00 [DBG] An error occurred using the connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:21.730 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:21.731 +02:00 [DBG] An error occurred using the connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:21.788 +02:00 [DBG] Opening connection to database 'master' on server '.'.
+2024-09-21 23:25:21.801 +02:00 [DBG] Opened connection to database 'master' on server '.'.
+2024-09-21 23:25:21.807 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:21.813 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (4ms).
+2024-09-21 23:25:21.819 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [NewsAggregatorDb];
+2024-09-21 23:25:22.035 +02:00 [INF] Executed DbCommand (215ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [NewsAggregatorDb];
+2024-09-21 23:25:22.036 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.036 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.036 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [NewsAggregatorDb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2024-09-21 23:25:22.095 +02:00 [INF] Executed DbCommand (59ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [NewsAggregatorDb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2024-09-21 23:25:22.096 +02:00 [DBG] Closing connection to database 'master' on server '.'.
+2024-09-21 23:25:22.099 +02:00 [DBG] Closed connection to database 'master' on server '.'.
+2024-09-21 23:25:22.101 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.104 +02:00 [DBG] Opened connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.104 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.104 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.104 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:25:22.110 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:25:22.110 +02:00 [DBG] Closing connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.110 +02:00 [DBG] Closed connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.172 +02:00 [DBG] DetectChanges starting for 'NewsAggregatorDbContext'.
+2024-09-21 23:25:22.174 +02:00 [DBG] DetectChanges completed for 'NewsAggregatorDbContext'.
+2024-09-21 23:25:22.182 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.182 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.182 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.182 +02:00 [DBG] Opened connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.182 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2024-09-21 23:25:22.188 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2024-09-21 23:25:22.188 +02:00 [DBG] Closing connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.188 +02:00 [DBG] Closed connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.189 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.189 +02:00 [DBG] Opened connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.189 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.189 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.189 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:25:22.190 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-09-21 23:25:22.190 +02:00 [DBG] Closing connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.190 +02:00 [DBG] Closed connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.194 +02:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2024-09-21 23:25:22.194 +02:00 [DBG] Created DbCommand for 'ExecuteScalar' (0ms).
+2024-09-21 23:25:22.195 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.195 +02:00 [DBG] Opened connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.195 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-09-21 23:25:22.206 +02:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-09-21 23:25:22.206 +02:00 [DBG] Closing connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.206 +02:00 [DBG] Closed connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.207 +02:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2024-09-21 23:25:22.207 +02:00 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2024-09-21 23:25:22.208 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.208 +02:00 [DBG] Opened connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.208 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-09-21 23:25:22.215 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-09-21 23:25:22.216 +02:00 [DBG] A data reader was disposed.
+2024-09-21 23:25:22.217 +02:00 [DBG] Closing connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.217 +02:00 [DBG] Closed connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.225 +02:00 [INF] Applying migration '20240921212511_init'.
+2024-09-21 23:25:22.260 +02:00 [DBG] Opening connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.261 +02:00 [DBG] Opened connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.261 +02:00 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2024-09-21 23:25:22.267 +02:00 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2024-09-21 23:25:22.268 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.268 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.268 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Articles] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [UrlToImage] nvarchar(max) NOT NULL,
+    [TrustScore] float NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_Articles] PRIMARY KEY ([Id])
+);
+2024-09-21 23:25:22.270 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Articles] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [UrlToImage] nvarchar(max) NOT NULL,
+    [TrustScore] float NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_Articles] PRIMARY KEY ([Id])
+);
+2024-09-21 23:25:22.271 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.271 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.271 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [RssSources] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_RssSources] PRIMARY KEY ([Id])
+);
+2024-09-21 23:25:22.273 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [RssSources] (
+    [Id] int NOT NULL IDENTITY,
+    [Source] nvarchar(max) NOT NULL,
+    [SourceUrl] nvarchar(max) NOT NULL,
+    [FeedUrl] nvarchar(max) NOT NULL,
+    [Title] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Link] nvarchar(max) NOT NULL,
+    [Author] nvarchar(max) NOT NULL,
+    [PubDate] nvarchar(max) NOT NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_RssSources] PRIMARY KEY ([Id])
+);
+2024-09-21 23:25:22.273 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.273 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.273 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [UrlToImageConfig] (
+    [Id] int NOT NULL IDENTITY,
+    [RssSourceId] int NOT NULL,
+    [Query] nvarchar(max) NOT NULL,
+    [Attribute] nvarchar(max) NULL,
+    [Regex] nvarchar(max) NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_UrlToImageConfig] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UrlToImageConfig_RssSources_RssSourceId] FOREIGN KEY ([RssSourceId]) REFERENCES [RssSources] ([Id]) ON DELETE CASCADE
+);
+2024-09-21 23:25:22.276 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [UrlToImageConfig] (
+    [Id] int NOT NULL IDENTITY,
+    [RssSourceId] int NOT NULL,
+    [Query] nvarchar(max) NOT NULL,
+    [Attribute] nvarchar(max) NULL,
+    [Regex] nvarchar(max) NULL,
+    [CreatedOn] datetime2 NOT NULL,
+    [ModifiedOn] datetime2 NOT NULL,
+    CONSTRAINT [PK_UrlToImageConfig] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UrlToImageConfig_RssSources_RssSourceId] FOREIGN KEY ([RssSourceId]) REFERENCES [RssSources] ([Id]) ON DELETE CASCADE
+);
+2024-09-21 23:25:22.276 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.277 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.277 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] ON;
+INSERT INTO [RssSources] ([Id], [Author], [CreatedOn], [Description], [FeedUrl], [Link], [ModifiedOn], [PubDate], [Source], [SourceUrl], [Title])
+VALUES (1, N'author', '2024-09-21T23:25:11.5642985+02:00', N'description', N'https://mia.mk/feed', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'MIA', N'https://mia.mk', N'title'),
+(2, N'dc:creator', '2024-09-21T23:25:11.5643049+02:00', N'content:encoded', N'https://telma.com.mk/feed/', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Telma', N'https://telma.com.mk', N'title'),
+(3, N'', '2024-09-21T23:25:11.5643052+02:00', N'content', N'https://admin.24.mk/api/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'24Vesti', N'https://24.mk', N'title'),
+(4, N'dc:creator', '2024-09-21T23:25:11.5643056+02:00', N'description', N'https://sitel.com.mk/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Sitel', N'https://sitel.com.mk', N'title'),
+(5, N'author', '2024-09-21T23:25:11.5643059+02:00', N'content', N'https://kanal5.com.mk/rss.aspx', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Kanal5', N'https://kanal5.com.mk', N'title');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] OFF;
+2024-09-21 23:25:22.328 +02:00 [INF] Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] ON;
+INSERT INTO [RssSources] ([Id], [Author], [CreatedOn], [Description], [FeedUrl], [Link], [ModifiedOn], [PubDate], [Source], [SourceUrl], [Title])
+VALUES (1, N'author', '2024-09-21T23:25:11.5642985+02:00', N'description', N'https://mia.mk/feed', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'MIA', N'https://mia.mk', N'title'),
+(2, N'dc:creator', '2024-09-21T23:25:11.5643049+02:00', N'content:encoded', N'https://telma.com.mk/feed/', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Telma', N'https://telma.com.mk', N'title'),
+(3, N'', '2024-09-21T23:25:11.5643052+02:00', N'content', N'https://admin.24.mk/api/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'24Vesti', N'https://24.mk', N'title'),
+(4, N'dc:creator', '2024-09-21T23:25:11.5643056+02:00', N'description', N'https://sitel.com.mk/rss.xml', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Sitel', N'https://sitel.com.mk', N'title'),
+(5, N'author', '2024-09-21T23:25:11.5643059+02:00', N'content', N'https://kanal5.com.mk/rss.aspx', N'link', '0001-01-01T00:00:00.0000000', N'pubDate', N'Kanal5', N'https://kanal5.com.mk', N'title');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Author', N'CreatedOn', N'Description', N'FeedUrl', N'Link', N'ModifiedOn', N'PubDate', N'Source', N'SourceUrl', N'Title') AND [object_id] = OBJECT_ID(N'[RssSources]'))
+    SET IDENTITY_INSERT [RssSources] OFF;
+2024-09-21 23:25:22.328 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.328 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.328 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] ON;
+INSERT INTO [UrlToImageConfig] ([Id], [Attribute], [CreatedOn], [ModifiedOn], [Query], [Regex], [RssSourceId])
+VALUES (1, N'url', '2024-09-21T23:25:11.5643143+02:00', '0001-01-01T00:00:00.0000000', N'enclosure', NULL, 1),
+(2, NULL, '2024-09-21T23:25:11.5643151+02:00', '0001-01-01T00:00:00.0000000', N'content:encoded', N'<img[^>]*src=\"([^\"]*)\"', 2),
+(3, N'src', '2024-09-21T23:25:11.5643154+02:00', '0001-01-01T00:00:00.0000000', N'img', NULL, 3),
+(4, NULL, '2024-09-21T23:25:11.5643158+02:00', '0001-01-01T00:00:00.0000000', N'description', N'<img[^>]*src=\"([^\"]*)\"', 4),
+(5, NULL, '2024-09-21T23:25:11.5643161+02:00', '0001-01-01T00:00:00.0000000', N'thumbnail', NULL, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] OFF;
+2024-09-21 23:25:22.349 +02:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] ON;
+INSERT INTO [UrlToImageConfig] ([Id], [Attribute], [CreatedOn], [ModifiedOn], [Query], [Regex], [RssSourceId])
+VALUES (1, N'url', '2024-09-21T23:25:11.5643143+02:00', '0001-01-01T00:00:00.0000000', N'enclosure', NULL, 1),
+(2, NULL, '2024-09-21T23:25:11.5643151+02:00', '0001-01-01T00:00:00.0000000', N'content:encoded', N'<img[^>]*src=\"([^\"]*)\"', 2),
+(3, N'src', '2024-09-21T23:25:11.5643154+02:00', '0001-01-01T00:00:00.0000000', N'img', NULL, 3),
+(4, NULL, '2024-09-21T23:25:11.5643158+02:00', '0001-01-01T00:00:00.0000000', N'description', N'<img[^>]*src=\"([^\"]*)\"', 4),
+(5, NULL, '2024-09-21T23:25:11.5643161+02:00', '0001-01-01T00:00:00.0000000', N'thumbnail', NULL, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Attribute', N'CreatedOn', N'ModifiedOn', N'Query', N'Regex', N'RssSourceId') AND [object_id] = OBJECT_ID(N'[UrlToImageConfig]'))
+    SET IDENTITY_INSERT [UrlToImageConfig] OFF;
+2024-09-21 23:25:22.349 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.349 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.349 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UrlToImageConfig_RssSourceId] ON [UrlToImageConfig] ([RssSourceId]);
+2024-09-21 23:25:22.353 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UrlToImageConfig_RssSourceId] ON [UrlToImageConfig] ([RssSourceId]);
+2024-09-21 23:25:22.353 +02:00 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2024-09-21 23:25:22.353 +02:00 [DBG] Created DbCommand for 'ExecuteNonQuery' (0ms).
+2024-09-21 23:25:22.353 +02:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240921212511_init', N'6.0.33');
+2024-09-21 23:25:22.355 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240921212511_init', N'6.0.33');
+2024-09-21 23:25:22.356 +02:00 [DBG] Committing transaction.
+2024-09-21 23:25:22.359 +02:00 [DBG] Committed transaction.
+2024-09-21 23:25:22.360 +02:00 [DBG] Disposing transaction.
+2024-09-21 23:25:22.360 +02:00 [DBG] Closing connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.360 +02:00 [DBG] Closed connection to database 'NewsAggregatorDb' on server '.'.
+2024-09-21 23:25:22.361 +02:00 [DBG] 'NewsAggregatorDbContext' disposed.
