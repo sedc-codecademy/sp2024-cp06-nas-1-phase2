@@ -32,6 +32,8 @@ namespace sp2024_cp06_nas_1_phase2
 
             builder.Services.RegisterDbContext(appSettings.ConnectionString);
             builder.Services.AddTransient<IApiService, ApiService>();
+            builder.Services.AddTransient<IRssFeedService, RssFeedService>();
+            builder.Services.AddTransient<IArticleService, ArticleService>();
 
             builder.Services.RegisterRepositories();
 

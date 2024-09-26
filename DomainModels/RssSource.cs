@@ -10,6 +10,9 @@
         public string Link { get; set; }
         public string Author { get; set; }
         public string PubDate { get; set; }
-        public ICollection<UrlToImageConfig> UrlToImagescConfigs { get; set; }
+
+        // Navigation properties
+        public ICollection<Article> Articles { get; set; } // RssSource has many Articles
+        public ICollection<UrlToImageConfig> UrlToImageConfigs { get; set; } // RssSource has many UrlToImageConfigs
     }
 }
