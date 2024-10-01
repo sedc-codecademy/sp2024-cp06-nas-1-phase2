@@ -1,52 +1,96 @@
-﻿using DataAccess;
+﻿using DataAccess.Interfaces;
 using DomainModels;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Services.Interfaces;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using AutoMapper;
+using DTOs.Article;
 
 namespace Services.Implementations
 {
     public class ApiService : IApiService
     {
-        private readonly NewsAggregatorDbContext _dbContext;
+        private readonly IRssSourceRepository _rssSourceRepository;
+        private readonly IArticleRepository _articleRepository;
+        private readonly IUrlToImageConfigRepository _urlToImageConfigRepository;
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
-        public ApiService(NewsAggregatorDbContext dbContext,
+        public ApiService(IRssSourceRepository rssSourceRepository,
+            IArticleRepository articleRepository,
+            IUrlToImageConfigRepository urlToImageConfigRepository,
             HttpClient httpClient,
-            IConfiguration configuration)
+            IMapper mapper)
         {
-            _dbContext = dbContext;
+            _rssSourceRepository = rssSourceRepository;
+            _articleRepository = articleRepository;
+            _urlToImageConfigRepository = urlToImageConfigRepository;
             _httpClient = httpClient;
-            _configuration = configuration;
+            _mapper = mapper;
         }
-        public async Task<List<Article>> FetchRssFeedsAsync()
+        public async Task<List<ArticleDto>> FetchRssFeedsAsync()
         {
             var allArticles = new List<Article>();
 
             // Retrieve RSS feeds from the database
-            var rssFeeds = await _dbContext.RssSources.ToListAsync();
+            var rssFeeds = await _rssSourceRepository.GetAllAsync();
 
-            foreach (var urlConfig in rssFeeds)
+            foreach (var rssSource in rssFeeds)
             {
                 try
                 {
-                    var xmlData = await FetchRssFeedXmlAsync(urlConfig.FeedUrl);
-                    var parsedArticles = ParseRss(xmlData, urlConfig);
+                    var xmlData = await FetchRssFeedXmlAsync(rssSource.FeedUrl);
+                    var parsedArticles = ParseRss(xmlData, rssSource);
 
                     allArticles.AddRange(parsedArticles);
+
+                    foreach (var article in parsedArticles)
+                    {
+                        await _articleRepository.AddAsync(article);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error fetching or parsing RSS feed from {urlConfig.Source}: {ex.Message}");
+                    Console.WriteLine($"Error fetching or parsing RSS feed from {rssSource.Source}: {ex.Message}");
                 }
             }
 
-            return allArticles;
+            var allArticlesDto = allArticles.Select(x => _mapper.Map<ArticleDto>(x)).ToList();
+            return allArticlesDto;
         }
-
+        /*
+        private void ExtractImagesForArticles(List<Article> articles, List<XElement> items,
+            ICollection<UrlToImageConfig> imageConfigs)
+        {
+            for (int i = 0; i < articles.Count; i++)
+            {
+                foreach (var config in imageConfigs)
+                {
+                    var imageElement = items[i].Descendants(config.Query).FirstOrDefault();
+                    if (imageElement != null)
+                    {
+                        if (!string.IsNullOrEmpty(config.Attribute))
+                        {
+                            articles[i].UrlToImage = imageElement.Attribute(config.Attribute)?.Value ?? string.Empty;
+                        }
+                        else if (!string.IsNullOrEmpty(config.Regex))
+                        {
+                            var regex = new Regex(config.Regex);
+                            var match = regex.Match(imageElement.Value);
+                            articles[i].UrlToImage = match.Success ? match.Value : string.Empty;
+                        }
+                    }
+                }
+            }
+        }
+        */
+        private async Task<string> FetchRssFeedXmlAsync(string feedUrl)
+        {
+            var response = await _httpClient.GetAsync(feedUrl);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+        /*
         private static async Task<string> FetchRssFeedXmlAsync(string feedUrl)
         {
             using (var httpClient = new HttpClient())
@@ -60,7 +104,8 @@ namespace Services.Implementations
                 return await response.Content.ReadAsStringAsync();
             }
         }
-        private List<Article> ParseRss(string xmlData, RssSource urlConfig)
+        */
+        private List<Article> ParseRss(string xmlData, RssSource rssSource)
         {
             var articles = new List<Article>();
 
@@ -73,15 +118,25 @@ namespace Services.Implementations
                 {
                     var article = new Article
                     {
-                        Source = urlConfig.Source,
-                        SourceUrl = urlConfig.SourceUrl,
-                        FeedUrl = urlConfig.FeedUrl,
-                        Title = GetElementValue(item, urlConfig.Title),
-                        Description = StripHtmlTags(GetElementValue(item, urlConfig.Description)),
-                        Link = GetElementValue(item, urlConfig.Link),
-                        Author = GetElementValue(item, urlConfig.Author),
-                        PubDate = GetElementValue(item, urlConfig.PubDate),
+                        RssSourceId = rssSource.Id,
+                        Title = GetElementValue(item, rssSource.Title),
+                        Description = StripHtmlTags(GetElementValue(item, rssSource.Description)),
+                        Link = GetElementValue(item, rssSource.Link),
+                        Author = GetElementValue(item, rssSource.Author),
+                        PubDate = GetElementValue(item, rssSource.PubDate),
+                        FeedUrl = rssSource.FeedUrl
+
+                        //Source = rssSource.Source,
+                        //SourceUrl = rssSource.SourceUrl,
+                        //FeedUrl = rssSource.FeedUrl,
+                        //Title = GetElementValue(item, rssSource.Title),
+                        //Description = StripHtmlTags(GetElementValue(item, rssSource.Description)),
+                        //Link = GetElementValue(item, rssSource.Link),
+                        //Author = GetElementValue(item, rssSource.Author),
+                        //PubDate = GetElementValue(item, rssSource.PubDate),
                     };
+                    var urlToImageConfigs = _urlToImageConfigRepository.GetConfigsByRssSourceIdAsync(rssSource.Id).Result;
+                    article.UrlToImage = ExtractImageUrl(item, urlToImageConfigs);
                     articles.Add(article);
                 }
             }
@@ -92,10 +147,30 @@ namespace Services.Implementations
 
             return articles;
         }
-        private static string RemoveScriptTags(string xmlData)
+        private static string ExtractImageUrl(XElement item, IEnumerable<UrlToImageConfig> urlToImageConfigs)
         {
-            return Regex.Replace(xmlData, "<script.*?</script>", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            foreach (var config in urlToImageConfigs)
+            {
+                var element = item.Descendants(config.Query).FirstOrDefault();
+                if (element != null)
+                {
+                    if (!string.IsNullOrEmpty(config.Attribute))
+                    {
+                        return element.Attribute(config.Attribute)?.Value ?? string.Empty;
+                    }
+                    if (!string.IsNullOrEmpty(config.Regex))
+                    {
+                        var match = Regex.Match(element.Value, config.Regex);
+                        if (match.Success)
+                        {
+                            return match.Value;
+                        }
+                    }
+                }
+            }
+            return string.Empty;
         }
+        /*
         private static XElement FindElementByTagName(XElement parent, string tagName)
         {
             if (tagName.Contains(":"))
@@ -111,15 +186,19 @@ namespace Services.Implementations
                 return parent.Descendants(tagName).FirstOrDefault();
             }
         }
+        */
         private static string GetElementValue(XElement parent, string tagName)
         {
-            if (tagName == "")
-            {
-                return "";
-            }
-
-            XElement element = FindElementByTagName(parent, tagName);
+            if (string.IsNullOrEmpty(tagName)) return string.Empty;
+            XElement element = parent.Descendants(tagName).FirstOrDefault();
             return element?.Value.Trim() ?? string.Empty;
+            //if (tagName == "")
+            //{
+            //    return "";
+            //}
+
+            //XElement element = FindElementByTagName(parent, tagName);
+            //return element?.Value.Trim() ?? string.Empty;
         }
         private static string StripHtmlTags(string text, List<string> allowedTags = null)
         {
@@ -131,6 +210,10 @@ namespace Services.Implementations
             var tagList = string.Join("|", allowedTags);
             var regex = new Regex($"<(?!/?(?:{tagList})\\b)[^>]*>", RegexOptions.IgnoreCase);
             return regex.Replace(text, string.Empty);
+        }
+        private static string RemoveScriptTags(string xmlData)
+        {
+            return Regex.Replace(xmlData, "<script.*?</script>", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         }
     }
 }

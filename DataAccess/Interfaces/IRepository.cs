@@ -4,10 +4,10 @@ namespace DataAccess.Interfaces
 {
     public interface IRepository<T> where T : BaseClass
     {
-        IEnumerable<T> GetAll();
-        T GetById(int id);
-        //List<RssSource> GetBySource(string source);
-        int Add(T entity);
-        int Remove(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(int id);
     }
 }

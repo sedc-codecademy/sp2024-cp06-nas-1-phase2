@@ -12,6 +12,7 @@ namespace Services.Implementations
         {
             _httpClient = httpClient;
         }
+        /*
         public async Task<string> FetchRssFeedXmlAsync(string feedUrl)
         {
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "RSSFetcher/1.0");
@@ -30,5 +31,7 @@ namespace Services.Implementations
         {
             return Regex.Replace(xmlData, "<script.*?</script>", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         }
+        */
     }
+
 }

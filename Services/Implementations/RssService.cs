@@ -6,8 +6,9 @@ using DTOs;
 
 namespace Services.Implementations
 {
+
 //    public class RssService : IRssService
-//    {
+//   {
 //        private readonly HttpClient _httpClient;
 //        public RssService()
 //        {

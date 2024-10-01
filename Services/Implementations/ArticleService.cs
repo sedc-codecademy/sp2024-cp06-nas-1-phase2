@@ -7,21 +7,20 @@ namespace Services.Implementations
 {
     public class ArticleService : IArticleService
     {
-        public List<Article> CreateArticles(List<XElement> items, RssSource urlConfig)
+        public List<Article> CreateArticles(List<XElement> items, RssSource rssSource)
         {
             var articles = new List<Article>();
             foreach (var item in items)
             {
                 var article = new Article
                 {
-                    Source = urlConfig.Source,
-                    SourceUrl = urlConfig.SourceUrl,
-                    FeedUrl = urlConfig.FeedUrl,
-                    Title = GetElementValue(item, urlConfig.Title),
-                    Description = StripHtmlTags(GetElementValue(item, urlConfig.Description)),
-                    Link = GetElementValue(item, urlConfig.Link),
-                    Author = GetElementValue(item, urlConfig.Author),
-                    PubDate = GetElementValue(item, urlConfig.PubDate),
+                    RssSourceId = rssSource.Id,
+                    FeedUrl = rssSource.FeedUrl,
+                    Title = GetElementValue(item, rssSource.Title),
+                    Description = StripHtmlTags(GetElementValue(item, rssSource.Description)),
+                    Link = GetElementValue(item, rssSource.Link),
+                    Author = GetElementValue(item, rssSource.Author),
+                    PubDate = GetElementValue(item, rssSource.PubDate),
                 };
                 articles.Add(article);
             }

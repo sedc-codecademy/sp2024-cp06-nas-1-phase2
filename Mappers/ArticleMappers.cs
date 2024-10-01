@@ -1,5 +1,5 @@
 ﻿using DomainModels;
-using DTOs;
+using DTOs.Article;
 
 namespace Mappers
 {
@@ -7,36 +7,36 @@ namespace Mappers
     {
         public static Article ToArticleModel(this ArticleDto articleDto)
         {
-            return new Article
-            {
-                Source = articleDto.Source,
-                SourceUrl = articleDto.SourceUrl,
-                FeedUrl = articleDto.FeedUrl,
-                Title = articleDto.Title,
-                Description = articleDto.Description,
-                Link = articleDto.Link,
-                Author = articleDto.Author,
-                PubDate = articleDto.PubDate,
-                UrlToImage = articleDto.UrlToImage,
-                TrustScore = articleDto.TrustScore
-            };
+            return new Article();
+            //{
+            //    Source = articleDto.Source,
+            //    SourceUrl = articleDto.SourceUrl,
+            //    FeedUrl = articleDto.FeedUrl,
+            //    Title = articleDto.Title,
+            //    Description = articleDto.Description,
+            //    Link = articleDto.Link,
+            //    Author = articleDto.Author,
+            //    PubDate = articleDto.PubDate,
+            //    UrlToImage = articleDto.UrlToImage,
+            //    TrustScore = articleDto.TrustScore
+            //};
         }
 
         public static ArticleDto ToArticleDto(this Article articleDto)
         {
-            return new ArticleDto
-            {
-                Source = articleDto.Source,
-                SourceUrl = articleDto.SourceUrl,
-                FeedUrl = articleDto.FeedUrl,
-                Title = articleDto.Title,
-                Description = articleDto.Description,
-                Link = articleDto.Link,
-                Author = articleDto.Author,
-                PubDate = articleDto.PubDate,
-                UrlToImage = articleDto.UrlToImage,
-                TrustScore = articleDto.TrustScore
-            };
+            return new ArticleDto();
+            //{
+            //    Source = articleDto.Source,
+            //    SourceUrl = articleDto.SourceUrl,
+            //    FeedUrl = articleDto.FeedUrl,
+            //    Title = articleDto.Title,
+            //    Description = articleDto.Description,
+            //    Link = articleDto.Link,
+            //    Author = articleDto.Author,
+            //    PubDate = articleDto.PubDate,
+            //    UrlToImage = articleDto.UrlToImage,
+            //    TrustScore = articleDto.TrustScore
+            //};
         }
     }
 }

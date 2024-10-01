@@ -1,6 +1,6 @@
-﻿namespace DTOs
+﻿namespace DTOs.RssSource
 {
-    public class ArticleDto
+    public class RssSourceDto
     {
         public string Source { get; set; }
         public string SourceUrl { get; set; }
@@ -10,7 +10,7 @@
         public string Link { get; set; }
         public string Author { get; set; }
         public string PubDate { get; set; }
-        public string UrlToImage { get; set; }
-        public double TrustScore { get; set; }
+        public List<string> UrlToImage { get; set; }
+        //public UrlToImageConfig UrlToImageConfig { get; set; }
     }
 }

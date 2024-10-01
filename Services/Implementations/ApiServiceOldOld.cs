@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Services.Implementations
 {
+    /*
     public class ApiServiceOldOld : IApiServiceOLD
     {
         private readonly List<RssSource> _urls;
@@ -320,4 +321,5 @@ namespace Services.Implementations
             return Regex.Replace(xmlData, "<script.*?</script>", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         }
     }
+    */
 }

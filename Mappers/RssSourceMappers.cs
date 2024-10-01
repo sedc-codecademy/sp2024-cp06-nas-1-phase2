@@ -1,5 +1,5 @@
 ﻿using DomainModels;
-using DTOs;
+using DTOs.RssSource;
 
 namespace Mappers
 {
