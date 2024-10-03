@@ -9,9 +9,9 @@
         public string PubDate { get; set; }
         public string FeedUrl { get; set; }
 
-        // Foreign key to RssSource
-        public int RssSourceId { get; set; }
-        public RssSource RssSource { get; set; } // Navigation property to RssSource
+        // Foreign key to RssFeed
+        public int RssFeedId { get; set; }
+        public RssFeed RssFeed { get; set; } // Navigation property to RssFeed
 
         public string UrlToImage { get; set; } // For image extraction
     }

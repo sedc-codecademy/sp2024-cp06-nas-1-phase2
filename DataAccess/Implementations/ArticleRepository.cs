@@ -18,13 +18,19 @@ namespace DataAccess.Implementations
             try
             {
                 return await _context.Articles
-                    .Where(x => x.RssSourceId == rssSourceId)
+                    .Where(x => x.RssFeedId == rssSourceId)
                     .ToListAsync();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task AddRangeAsync(IEnumerable<Article> articles)
+        {
+            await _context.Articles.AddRangeAsync(articles);
+            await _context.SaveChangesAsync();
         }
     }
 }

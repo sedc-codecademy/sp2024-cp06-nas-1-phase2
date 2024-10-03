@@ -4,6 +4,6 @@ namespace Services.Interfaces
 {
     public interface IApiService
     {
-        public Task<List<ArticleDto>> FetchRssFeedsAsync();
+        //Task FetchRssFeedsAsync();//<List<ArticleDto>> FetchRssFeedsAsync();
     }
 }

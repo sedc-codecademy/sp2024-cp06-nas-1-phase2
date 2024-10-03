@@ -14,7 +14,7 @@ namespace Services.Implementations
 //        {
 //            _httpClient = new HttpClient();
 //        }
-//        public async Task<List<Dictionary<string, string>>> FetchAndParseRssFeedsAsync(List<RssSourceDto> urls)
+//        public async Task<List<Dictionary<string, string>>> FetchAndParseRssFeedsAsync(List<RssFeedDto> urls)
 //        {
 //            var allArticles = new List<Dictionary<string, string>>();
 
@@ -37,7 +37,7 @@ namespace Services.Implementations
 //            return allArticles;
 //        }
 
-//        private IEnumerable<Dictionary<string, string>> ParseRss(string xml, RssSourceDto rssSourceDto)
+//        private IEnumerable<Dictionary<string, string>> ParseRss(string xml, RssFeedDto rssFeedDto)
 //        {
 //            var filteredXml = xml.Replace("<script", "<removed-script").Replace("</script>", "</removed-script>");
 //            var xmlDoc = XDocument.Parse(filteredXml);
@@ -49,12 +49,12 @@ namespace Services.Implementations
 //            {
 //                var article = new Dictionary<string, string>
 //                {
-//                    { "title", GetElementText(item, rssSourceDto.Title) },
-//                    { "description", StripHtmlTags(GetElementText(item, rssSourceDto.Description)) },
-//                    { "link", GetElementText(item, rssSourceDto.Link) },
-//                    { "author", GetElementText(item, rssSourceDto.Author) },
-//                    { "pubDate", GetElementText(item, rssSourceDto.PubDate) },
-//                    { "urlToImage", GetEnclosureUrl(item, rssSourceDto.UrlToImageConfig) }
+//                    { "title", GetElementText(item, rssFeedDto.Title) },
+//                    { "description", StripHtmlTags(GetElementText(item, rssFeedDto.Description)) },
+//                    { "link", GetElementText(item, rssFeedDto.Link) },
+//                    { "author", GetElementText(item, rssFeedDto.Author) },
+//                    { "pubDate", GetElementText(item, rssFeedDto.PubDate) },
+//                    { "urlToImage", GetEnclosureUrl(item, rssFeedDto.UrlToImageConfig) }
 //                };
 //                articles.Add(article);
 //            }
@@ -66,12 +66,12 @@ namespace Services.Implementations
 
 //            return items.Select(item => new Dictionary<string, string>
 //                {
-//                    { "title", GetElementText(item, rssSourceDto.Title) },
-//                    { "description", StripHtmlTags(GetElementText(item, rssSourceDto.Description)) },
-//                    { "link", GetElementText(item, rssSourceDto.Link) },
-//                    { "author", GetElementText(item, rssSourceDto.Author) },
-//                    { "pubDate", GetElementText(item, rssSourceDto.PubDate) },
-//                    { "urlToImage", GetEnclosureUrl(item, rssSourceDto.UrlToImage) }
+//                    { "title", GetElementText(item, rssFeedDto.Title) },
+//                    { "description", StripHtmlTags(GetElementText(item, rssFeedDto.Description)) },
+//                    { "link", GetElementText(item, rssFeedDto.Link) },
+//                    { "author", GetElementText(item, rssFeedDto.Author) },
+//                    { "pubDate", GetElementText(item, rssFeedDto.PubDate) },
+//                    { "urlToImage", GetEnclosureUrl(item, rssFeedDto.UrlToImage) }
 //                })
 //                .ToList();
 //             */

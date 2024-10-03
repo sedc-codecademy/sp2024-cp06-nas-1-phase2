@@ -7,10 +7,10 @@ namespace DataAccess
     {
         public static void Seed(ModelBuilder builder)
         {
-            builder.Entity<RssSource>()
-                .HasData(new List<RssSource>
+            builder.Entity<RssFeed>()
+                .HasData(new List<RssFeed>
                 {
-                    new RssSource
+                    new RssFeed
                     {
                         Id = 1,
                         Source = "MIA",
@@ -22,7 +22,7 @@ namespace DataAccess
                         Author = "author",
                         PubDate = "pubDate"
                     },
-                    new RssSource
+                    new RssFeed
                     {
                         Id = 2,
                         Source = "Telma",
@@ -34,7 +34,7 @@ namespace DataAccess
                         Author = "dc:creator",
                         PubDate = "pubDate"
                     },
-                    new RssSource
+                    new RssFeed
                     {
                         Id = 3,
                         Source = "24Vesti",
@@ -46,7 +46,7 @@ namespace DataAccess
                         Author = "",
                         PubDate = "pubDate"
                     },
-                    new RssSource
+                    new RssFeed
                     {
                         Id = 4,
                         Source = "Sitel",
@@ -58,7 +58,7 @@ namespace DataAccess
                         Author = "dc:creator",
                         PubDate = "pubDate"
                     },
-                    new RssSource
+                    new RssFeed
                     {
                         Id = 5,
                         Source = "Kanal5",

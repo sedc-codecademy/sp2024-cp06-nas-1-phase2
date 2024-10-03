@@ -1,10 +1,16 @@
-﻿using System.Xml.Linq;
+﻿using DTOs.RssFeed;
+using System.Xml.Linq;
 
 namespace Services.Interfaces
 {
     public interface IRssFeedService
     {
-        //public Task<string> FetchRssFeedXmlAsync(string feedUrl);
-        //public List<XElement> ParseRssItems(string xmlData);
+        Task<IEnumerable<RssFeedDto>> GetAllRssFeedsAsync();
+        //Task<string> ExtractImageUrl(XElement item, RssFeedDto rssFeed);
+        //Task<string> FetchRssFeedXmlAsync(string feedUrl);
+        //Task<RssFeedDto> GetRssFeedByIdAsync(int id);
+        //Task AddRssFeedAsync(AddRssFeedDto rssFeedDto);
+        //Task UpdateRssFeedAsync(UpdateRssFeedDto rssFeedDto);
+        //Task DeleteRssFeedAsync(int id);
     }
 }

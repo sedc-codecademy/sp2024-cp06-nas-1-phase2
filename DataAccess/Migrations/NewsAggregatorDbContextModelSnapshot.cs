@@ -80,7 +80,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("DomainModels.RssSource", b =>
+            modelBuilder.Entity("DomainModels.RssFeed", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,16 +285,16 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DomainModels.UrlToImageConfig", b =>
                 {
-                    b.HasOne("DomainModels.RssSource", "RssSource")
+                    b.HasOne("DomainModels.RssFeed", "RssFeed")
                         .WithMany("UrlToImagescConfigs")
                         .HasForeignKey("RssSourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RssSource");
+                    b.Navigation("RssFeed");
                 });
 
-            modelBuilder.Entity("DomainModels.RssSource", b =>
+            modelBuilder.Entity("DomainModels.RssFeed", b =>
                 {
                     b.Navigation("UrlToImagescConfigs");
                 });

@@ -11,21 +11,21 @@ namespace DataAccess
         }
 
         public DbSet<Article> Articles { get; set; }
-        public DbSet<RssSource> RssSources { get; set; }
+        public DbSet<RssFeed> RssFeeds { get; set; }
         public DbSet<UrlToImageConfig> UrlToImageConfigs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<RssSource>()
-                .HasMany(rs => rs.Articles)        // RssSource can have many Articles
-                .WithOne(a => a.RssSource)         // Each Article has one RssSource
+            builder.Entity<RssFeed>()
+                .HasMany(rs => rs.Articles)        // RssFeed can have many Articles
+                .WithOne(a => a.RssFeed)         // Each Article has one RssFeed
                 .HasForeignKey(a => a.RssSourceId) // Foreign key in Article
                 .OnDelete(DeleteBehavior.Cascade); // Define delete behavior
 
-            // Define one-to-many relationship between RssSource and UrlToImageConfigs
-            builder.Entity<RssSource>()
-                .HasMany(rs => rs.UrlToImageConfigs) // RssSource can have many UrlToImageConfigs
-                .WithOne(uic => uic.RssSource)       // Each UrlToImageConfig belongs to one RssSource
+            // Define one-to-many relationship between RssFeed and UrlToImageConfigs
+            builder.Entity<RssFeed>()
+                .HasMany(rs => rs.UrlToImageConfigs) // RssFeed can have many UrlToImageConfigs
+                .WithOne(uic => uic.RssFeed)       // Each UrlToImageConfig belongs to one RssFeed
                 .HasForeignKey(uic => uic.RssSourceId) // Foreign key in UrlToImageConfig
                 .OnDelete(DeleteBehavior.Cascade);
 

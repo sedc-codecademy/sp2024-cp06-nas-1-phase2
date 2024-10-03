@@ -1,40 +1,40 @@
 ﻿using DomainModels;
-using DTOs.RssSource;
+using DTOs.RssFeed;
 
 namespace Mappers
 {
     public static class RssSourceMappers
     {
-        public static RssSource ToRssSourceModel(this RssSourceDto rssSourceDto)
+        public static RssFeed ToRssSourceModel(this RssFeedDto rssFeedDto)
         {
-            return new RssSource
+            return new RssFeed
             {
-                Source = rssSourceDto.Source,
-                SourceUrl = rssSourceDto.SourceUrl,
-                FeedUrl = rssSourceDto.FeedUrl,
-                Title = rssSourceDto.Title,
-                Description = rssSourceDto.Description,
-                Link = rssSourceDto.Link,
-                Author = rssSourceDto.Author,
-                PubDate = rssSourceDto.PubDate,
-                //UrlToImageList = rssSourceDto.UrlToImageList,
-                //UrlToImage = rssSourceDto.UrlToImage,
+                Source = rssFeedDto.Source,
+                SourceUrl = rssFeedDto.SourceUrl,
+                FeedUrl = rssFeedDto.FeedUrl,
+                Title = rssFeedDto.Title,
+                Description = rssFeedDto.Description,
+                Link = rssFeedDto.Link,
+                Author = rssFeedDto.Author,
+                PubDate = rssFeedDto.PubDate,
+                //UrlToImageList = rssFeedDto.UrlToImageList,
+                //UrlToImage = rssFeedDto.UrlToImage,
             };
         }
-        public static RssSourceDto ToRssSourceDto(this RssSource rssSourceDto)
+        public static RssFeedDto ToRssSourceDto(this RssFeed rssFeedDto)
         {
-            return new RssSourceDto
+            return new RssFeedDto
             {
-                Source = rssSourceDto.Source,
-                SourceUrl = rssSourceDto.SourceUrl,
-                FeedUrl = rssSourceDto.FeedUrl,
-                Title = rssSourceDto.Title,
-                Description = rssSourceDto.Description,
-                Link = rssSourceDto.Link,
-                Author = rssSourceDto.Author,
-                PubDate = rssSourceDto.PubDate,
-                //UrlToImageList = rssSourceDto.UrlToImageList,
-                //UrlToImage = rssSourceDto.UrlToImage,
+                Source = rssFeedDto.Source,
+                SourceUrl = rssFeedDto.SourceUrl,
+                FeedUrl = rssFeedDto.FeedUrl,
+                Title = rssFeedDto.Title,
+                Description = rssFeedDto.Description,
+                Link = rssFeedDto.Link,
+                Author = rssFeedDto.Author,
+                PubDate = rssFeedDto.PubDate,
+                //UrlToImageList = rssFeedDto.UrlToImageList,
+                //UrlToImage = rssFeedDto.UrlToImage,
             };
         }
     }

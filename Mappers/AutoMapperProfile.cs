@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DomainModels;
-using DTOs.RssSource;
+using DTOs.Article;
+using DTOs.RssFeed;
+using DTOs.UrlToImageConfig;
 
 namespace Mappers
 {
@@ -8,10 +10,16 @@ namespace Mappers
     {
         public AutoMapperProfile()
         {
-            //RssSource
-            CreateMap<RssSource, RssSourceDto>().ReverseMap();
-            CreateMap<RssSource, AddRssSourceDto>().ReverseMap();
-            CreateMap<RssSource, UpdateRssSourceDto>().ReverseMap();
+            //RssFeed
+            CreateMap<RssFeed, RssFeedDto>().ReverseMap();
+            CreateMap<RssFeed, AddRssFeedDto>().ReverseMap();
+            CreateMap<RssFeed, UpdateRssFeedDto>().ReverseMap();
+
+            //Article
+            CreateMap<Article, ArticleDto>().ReverseMap();
+
+            //UrlToImageConfig
+            CreateMap<UrlToImageConfig, UrlToImageConfigDto>().ReverseMap();
         }
     }
 }

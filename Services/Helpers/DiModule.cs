@@ -20,7 +20,7 @@ namespace Services.Helpers
         {
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-            services.AddTransient<IRssSourceRepository, RssSourceRepository>();
+            services.AddTransient<IRssFeedRepository, RssFeedRepository>();
             //services.AddTransient<IUserInfoRepository, UserInfoRepository>();
             //services.AddTransient<IBeverageRepository, BeverageRepository>();
             ////services.AddTransient<IRepository<Category>>(x => new CategoryAdoRepository(connectionString));

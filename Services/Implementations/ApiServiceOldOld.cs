@@ -9,7 +9,7 @@ namespace Services.Implementations
     /*
     public class ApiServiceOldOld : IApiServiceOLD
     {
-        private readonly List<RssSource> _urls;
+        private readonly List<RssFeed> _urls;
         private readonly HttpClient _httpClient;
         //private readonly OpenPageRankService _openPageRankService;
         private readonly IConfiguration _configuration;
@@ -22,9 +22,9 @@ namespace Services.Implementations
             //_openPageRankService = openPageRankService;
             _configuration = configuration;
 
-            _urls = new List<RssSource>
+            _urls = new List<RssFeed>
             {
-                new RssSource
+                new RssFeed
                 {
                     Source = "MIA",
                     SourceUrl = "https://mia.mk",
@@ -127,7 +127,7 @@ namespace Services.Implementations
             }
         }
 
-        private List<Article> ParseRss(string xmlData, RssSource urlConfig)
+        private List<Article> ParseRss(string xmlData, RssFeed urlConfig)
         {
             var articles = new List<Article>();
 
