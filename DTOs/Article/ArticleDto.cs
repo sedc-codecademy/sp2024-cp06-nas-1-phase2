@@ -8,7 +8,7 @@
         public string Author { get; set; }
         public string PubDate { get; set; }
         public string FeedUrl { get; set; }
-        public int RssSourceId { get; set; }
+        public int RssFeedId { get; set; }
         public string UrlToImage { get; set; }
         //public string Source { get; set; }
         //public string SourceUrl { get; set; }

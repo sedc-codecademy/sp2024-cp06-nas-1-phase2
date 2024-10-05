@@ -78,35 +78,35 @@ namespace DataAccess
                     new UrlToImageConfig
                     {
                         Id = 1,
-                        RssSourceId = 1,
+                        RssFeedId = 1,
                         Query = "enclosure",
                         Attribute = "url"
                     },
                     new UrlToImageConfig
                     {
                         Id = 2,
-                        RssSourceId = 2,
+                        RssFeedId = 2,
                         Query = "content:encoded",
                         Regex = @"<img[^>]*src=\""([^\""]*)\"""
                     },
                     new UrlToImageConfig
                     {
                         Id = 3,
-                        RssSourceId = 3,
+                        RssFeedId = 3,
                         Query = "img",
                         Attribute = "src"
                     },
                     new UrlToImageConfig
                     {
                         Id = 4,
-                        RssSourceId = 4,
+                        RssFeedId = 4,
                         Query = "description",
                         Regex = @"<img[^>]*src=\""([^\""]*)\"""
                     },
                     new UrlToImageConfig
                     {
                         Id = 5,
-                        RssSourceId = 5,
+                        RssFeedId = 5,
                         Query = "thumbnail"
                     }
                 });

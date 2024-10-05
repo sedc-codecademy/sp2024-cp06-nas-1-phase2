@@ -6,7 +6,9 @@ namespace Services.Interfaces
     public interface IRssFeedService
     {
         Task<IEnumerable<RssFeedDto>> GetAllRssFeedsAsync();
-        //Task<string> ExtractImageUrl(XElement item, RssFeedDto rssFeed);
+        Task<RssFeedDto> GetRssFeedBySourceAsync(string source);
+        Task AddRssFeedWithConfigAsync(AddRssFeedDto addRssFeedDto);
+        Task FetchAndProcessRssFeedsAsync();
         //Task<string> FetchRssFeedXmlAsync(string feedUrl);
         //Task<RssFeedDto> GetRssFeedByIdAsync(int id);
         //Task AddRssFeedAsync(AddRssFeedDto rssFeedDto);

@@ -8,8 +8,8 @@ namespace Services.Interfaces
     {
         //public List<Article> CreateArticles(List<XElement> items, RssFeed urlConfig);
 
-        Task AddArticlesAsync(IEnumerable<ArticleDto> articles);
         Task<IEnumerable<ArticleDto>> GetAllArticlesAsync();
         Task<IEnumerable<ArticleDto>> GetAllArticlesBySourceAsync(int rssFeedId);
+        Task AddArticlesAsync(IEnumerable<ArticleDto> addArticles);
     }
 }

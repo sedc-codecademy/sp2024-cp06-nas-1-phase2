@@ -1,3 +1,4 @@
+using Mappers;
 using Serilog;
 using Services.Helpers;
 using Services.Implementations;
@@ -17,25 +18,30 @@ namespace sp2024_cp06_nas_1_phase2
             var appSettings = appConfig.Get<AppSettings>();
 
             builder.Services.AddControllers();
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             builder.Services.AddHttpClient();
 
-            builder.Host.UseSerilog((ctx, lc) =>
+            builder.Host.UseSerilog((context, configuration) =>
             {
-                lc.WriteTo.File($"Logs/logs.txt", outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}");
-                lc.MinimumLevel.Debug();
-                //lc.
+                configuration
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console()
+                    .WriteTo.File(
+                        path: $"Logs/log-.txt",
+                        rollingInterval: RollingInterval.Day,
+                        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+                        retainedFileCountLimit: 7
+                    );
             });
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
             builder.Services.RegisterDbContext(appSettings.ConnectionString);
-            builder.Services.AddTransient<IApiService, ApiService>();
-            builder.Services.AddTransient<IRssFeedService, RssFeedService>();
-            builder.Services.AddTransient<IArticleService, ArticleService>();
-
             builder.Services.RegisterRepositories();
+            builder.Services.RegisterServices();
+            builder.Services.AddSwagger();
+            builder.Services.AddCustomCors();
+            //builder.Services.AddJwt(builder.Configuration);
+
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
             var app = builder.Build();
 
@@ -48,6 +54,7 @@ namespace sp2024_cp06_nas_1_phase2
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

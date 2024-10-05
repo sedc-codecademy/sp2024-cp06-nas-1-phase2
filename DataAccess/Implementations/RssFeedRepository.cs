@@ -1,8 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using DataAccess.Interfaces;
+﻿using DataAccess.Interfaces;
 using DomainModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataAccess.Implementations
 {
@@ -13,18 +11,15 @@ namespace DataAccess.Implementations
         {
             _context = context;
         }
-
-        //public List<RssFeed> GetBySource(string source)
-        //{
-        //    var sources = _context.RssSources.Where(x => x.Source.Contains(source));
-        //    return sources.ToList();
-        //}
-
         public async Task<RssFeed> GetBySourceAsync(string source)
         {
             try
             {
                 return await _context.RssFeeds.FirstOrDefaultAsync(rs => rs.FeedUrl.Contains(source));
+            }
+            catch (DbUpdateException dbEx)
+            {
+                throw new Exception("Database update error: " + dbEx.Message);
             }
             catch (Exception ex)
             {

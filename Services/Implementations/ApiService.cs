@@ -1,49 +1,39 @@
-﻿using DomainModels;
-using Services.Interfaces;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-using AutoMapper;
+﻿using Services.Interfaces;
 using DTOs.Article;
-using DTOs.RssFeed;
-using DTOs.UrlToImageConfig;
 
 namespace Services.Implementations
 {
     public class ApiService : IApiService
     {
-        private readonly HttpClient _httpClient;
-        private readonly IMapper _mapper;
-
-        private readonly IRssFeedService _rssFeedService;
         private readonly IArticleService _articleService;
-        private readonly IUrlToImageConfigService _urlToImageConfigService;
 
-        public ApiService(HttpClient httpClient,
-            IMapper mapper,
-            IRssFeedService rssFeedService,
-            IArticleService articleService,
-            IUrlToImageConfigService urlToImageConfigService)
+        public ApiService(IArticleService articleService)
         {
-            _httpClient = httpClient;
-            _mapper = mapper;
-            _rssFeedService = rssFeedService;
             _articleService = articleService;
-            _urlToImageConfigService = urlToImageConfigService;
         }
-        public async Task ProcessFeedsAsync()
+        public async Task<IEnumerable<ArticleDto>> GetArticlesAsync()
         {
-            // Step 1: Get all feeds
-            var feeds = await _rssFeedService.GetAllRssFeedsAsync();
-
-            foreach (var feed in feeds)
-            {
-                // Step 2: Parse RSS feed (this logic would be specific to your app)
-                var articles = await _articleService.GetAllArticlesBySourceAsync(feed.Id);
-
-                // Step 3: Save parsed articles
-                await _articleService.AddArticlesAsync(articles);
-            }
+            return await _articleService.GetAllArticlesAsync();
         }
+
+        public async Task<IEnumerable<ArticleDto>> GetArticlesBySourceAsync(int rssFeedId)
+        {
+            return await _articleService.GetAllArticlesBySourceAsync(rssFeedId);
+        }
+        //public async Task ProcessFeedsAsync()
+        //{
+        //    // Step 1: Get all feeds
+        //    var feeds = await _rssFeedService.GetAllRssFeedsAsync();
+
+        //    foreach (var feed in feeds)
+        //    {
+        //        // Step 2: Parse RSS feed (this logic would be specific to your app)
+        //        var articles = await _articleService.GetAllArticlesBySourceAsync(feed.Id);
+
+        //        // Step 3: Save parsed articles
+        //        await _articleService.AddArticlesAsync(articles);
+        //    }
+        //}
         //public async Task FetchRssFeedsAsync()//<List<ArticleDto>> FetchRssFeedsAsync()
         //{
         //    var rssFeeds = await _rssFeedService.GetAllRssFeedsAsync();
@@ -66,7 +56,7 @@ namespace Services.Implementations
         //                Author = GetElementValue(item, rssFeed.Author),
         //                PubDate = GetElementValue(item, rssFeed.PubDate),
         //                FeedUrl = rssFeed.FeedUrl,
-        //                RssSourceId = rssFeed.Id,
+        //                RssFeedId = rssFeed.Id,
         //                UrlToImage = await _rssFeedService.ExtractImageUrl(item, rssFeed)
         //            };
 
@@ -167,7 +157,7 @@ namespace Services.Implementations
         //        {
         //            var article = new Article
         //            {
-        //                RssSourceId = rssFeed.Id,
+        //                RssFeedId = rssFeed.Id,
         //                Title = GetElementValue(item, rssFeed.Title),
         //                Description = StripHtmlTags(GetElementValue(item, rssFeed.Description)),
         //                Link = GetElementValue(item, rssFeed.Link),

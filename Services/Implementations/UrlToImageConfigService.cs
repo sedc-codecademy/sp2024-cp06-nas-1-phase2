@@ -3,6 +3,7 @@ using DataAccess.Interfaces;
 using DomainModels;
 using DTOs.UrlToImageConfig;
 using Services.Interfaces;
+using System.Xml.Linq;
 
 namespace Services.Implementations
 {
@@ -16,12 +17,13 @@ namespace Services.Implementations
             _configRepository = configRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<UrlToImageConfigDto>> GetByRssFeedId(int rssFeedId)
+        public async Task<UrlToImageConfigDto> GetByRssFeedId(int rssFeedId)
         {
             try
             {
-                var configs = await _configRepository.GetByIdAsync(rssFeedId);
-                return _mapper.Map<IEnumerable<UrlToImageConfigDto>>(configs);
+                var config = await _configRepository.GetConfigsByRssSourceIdAsync(rssFeedId);
+                //var test = _mapper.Map<UrlToImageConfigDto>(config);
+                return _mapper.Map<UrlToImageConfigDto>(config);
                 //var urlToImageConfig = await _urlToImageConfigRepository.GetConfigsByRssSourceIdAsync(rssFeedId);
 
                 //if (rssFeedId < 0 || rssFeedId > urlToImageConfig.Count())
@@ -37,6 +39,15 @@ namespace Services.Implementations
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public async Task<string> GetImageUrl(XElement item, int rssSourceId)
+        {
+            var config = await _configRepository.GetConfigsByRssSourceIdAsync(rssSourceId);
+            if (config == null) return string.Empty;
+
+            // Apply image extraction logic based on the config (Query, Attribute, Regex)
+            var element = item.Descendants(config.Query).FirstOrDefault();
+            return element?.Attribute(config.Attribute)?.Value ?? string.Empty;
         }
         public async Task AddUrlToImageConfigAsync(UrlToImageConfigDto configDto)
         {

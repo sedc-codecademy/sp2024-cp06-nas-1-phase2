@@ -1,7 +1,6 @@
 ﻿using DataAccess.Interfaces;
 using DomainModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataAccess.Implementations
 {
@@ -13,13 +12,18 @@ namespace DataAccess.Implementations
             _context = context;
         }
 
-        public async Task<IEnumerable<UrlToImageConfig>> GetConfigsByRssSourceIdAsync(int rssSourceId)
+        public Task<UrlToImageConfig> GetConfigsByRssSourceIdAsync(int rssFeedId)
         {
             try
             {
-                return await _context.UrlToImageConfigs
-                    .Where(x => x.RssSourceId == rssSourceId)
-                    .ToListAsync();
+                var response = _context.UrlToImageConfigs
+                    .Where(x => x.RssFeedId == rssFeedId)
+                    .FirstOrDefaultAsync();
+                if (response == null)
+                {
+                    throw new Exception("Not found.");
+                }
+                return response;
             }
             catch (Exception ex)
             {

@@ -1,9 +1,8 @@
-﻿using System.Net.Http;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using AutoMapper;
 using DataAccess.Interfaces;
 using DomainModels;
+using DTOs.Article;
 using DTOs.RssFeed;
 using Services.Interfaces;
 
@@ -13,139 +12,79 @@ namespace Services.Implementations
     {
         private readonly IRssFeedRepository _rssFeedRepository;
         private readonly IUrlToImageConfigService _urlToImageConfigService;
+        private readonly IArticleService _articleService;
         private readonly IMapper _mapper;
-        private readonly HttpClient _httpClient;
 
-        public RssFeedService(IRssFeedRepository rssFeedRepository,
+        public RssFeedService(
+            IRssFeedRepository rssFeedRepository,
             IUrlToImageConfigService urlToImageConfigService,
-            IMapper mapper,
-            HttpClient httpClient)
+            IArticleService articleService,
+            IMapper mapper)
         {
             _rssFeedRepository = rssFeedRepository;
             _urlToImageConfigService = urlToImageConfigService;
+            _articleService = articleService;
             _mapper = mapper;
-            _httpClient = httpClient;
         }
+
+        #region GenericMethods
+
         public async Task<IEnumerable<RssFeedDto>> GetAllRssFeedsAsync()
         {
             try
             {
                 var rssSources = await _rssFeedRepository.GetAllAsync();
                 return _mapper.Map<IEnumerable<RssFeedDto>>(rssSources);
-                //var rssSourcesDtos = rssSources.Select(x => _mapper.Map<RssFeedDto>(x)).ToList();
-                //return rssSourcesDtos;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public async Task<RssFeedDto> GetRssFeedByIdAsync(int id)
+        public async Task<RssFeedDto> GetRssFeedBySourceAsync(string source)
         {
             try
             {
-                var source = await _rssFeedRepository.GetByIdAsync(id);
+                var feed = await _rssFeedRepository.GetBySourceAsync(source);
                 if (source == null)
                 {
                     throw new Exception();
                 }
 
-                //var mapperSource = 
-                return _mapper.Map<RssFeedDto>(source);
+                return _mapper.Map<RssFeedDto>(feed);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public List<Article> CreateArticles(List<XElement> items, RssFeed rssFeed)
-        {
-            var articles = new List<Article>();
-            foreach (var item in items)
-            {
-                var article = new Article
-                {
-                    RssFeedId = rssFeed.Id,
-                    FeedUrl = rssFeed.FeedUrl,
-                    Title = GetElementValue(item, rssFeed.Title),
-                    Description = StripHtmlTags(GetElementValue(item, rssFeed.Description)),
-                    Link = GetElementValue(item, rssFeed.Link),
-                    Author = GetElementValue(item, rssFeed.Author),
-                    PubDate = GetElementValue(item, rssFeed.PubDate),
-                };
-                articles.Add(article);
-            }
-            return articles;
-        }
-        private static string GetElementValue(XElement parent, string tagName)
-        {
-            if (string.IsNullOrEmpty(tagName)) return string.Empty;
-            XElement element = parent.Descendants(tagName).FirstOrDefault();
-            return element?.Value.Trim() ?? string.Empty;
-        }
-        private static string StripHtmlTags(string text)
-        {
-            return Regex.Replace(text, "<.*?>", string.Empty);
-        }
-        public async Task<string> FetchRssFeedXmlAsync(string feedUrl)
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync(feedUrl);
-                response.EnsureSuccessStatusCode();
 
-                var xmlContent = await response.Content.ReadAsStringAsync();
-                return xmlContent;
-            }
-            catch (Exception ex)
-            {
-                // Log and handle exceptions as necessary
-                throw new Exception($"Error fetching RSS feed from {feedUrl}: {ex.Message}", ex);
-            }
-        }
-        public async Task<string> ExtractImageUrl(XElement item, RssFeedDto rssFeed)
+        public async Task AddRssFeedWithConfigAsync(AddRssFeedDto addRssFeedDto)
         {
-            var urlToImageConfigs = await _urlToImageConfigService.GetByRssFeedId(rssFeed.Id);
+            var rssFeed = _mapper.Map<RssFeed>(addRssFeedDto);
+            await _rssFeedRepository.AddAsync(rssFeed);
 
-            foreach (var config in urlToImageConfigs)
+            if (addRssFeedDto.UrlToImageConfig != null)
             {
-                // If Attribute is set, try extracting the image URL from the attribute of the element
-                if (!string.IsNullOrEmpty(config.Attribute))
-                {
-                    var element = item.Descendants(config.Query).FirstOrDefault();
-                    if (element != null && element.Attribute(config.Attribute) != null)
-                    {
-                        return element.Attribute(config.Attribute).Value;
-                    }
-                }
-
-                // If Regex is set, try matching the regex to find an image URL
-                if (!string.IsNullOrEmpty(config.Regex))
-                {
-                    var match = Regex.Match(item.ToString(), config.Regex);
-                    if (match.Success)
-                    {
-                        return match.Value;
-                    }
-                }
-            }
-
-            // Default to null if no image URL was found
-            return null;
-        }
-        public async Task AddRssFeedAsync(AddRssFeedDto rssFeedDto)
-        {
-            try
-            {
-                var addRssFeed = _mapper.Map<RssFeed>(rssFeedDto);
-
-                await _rssFeedRepository.AddAsync(addRssFeed);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
+                var urlConfig = addRssFeedDto.UrlToImageConfig;//_mapper.Map<UrlToImageConfig>(addRssFeedDto.UrlToImageConfig);
+                urlConfig.RssFeedId = rssFeed.Id;
+                await _urlToImageConfigService.AddUrlToImageConfigAsync(urlConfig);
             }
         }
+
+        //public async Task AddRssFeedAsync(AddRssFeedDto rssFeedDto)
+        //{
+        //    try
+        //    {
+        //        var addRssFeed = _mapper.Map<RssFeed>(rssFeedDto);
+
+        //        await _rssFeedRepository.AddAsync(addRssFeed);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
         public async Task UpdateRssFeedAsync(UpdateRssFeedDto rssFeedDto)
         {
             try
@@ -176,6 +115,72 @@ namespace Services.Implementations
                 throw new Exception(ex.Message);
             }
         }
+
+        #endregion
+
+        #region ProcessingXML
+
+        public async Task FetchAndProcessRssFeedsAsync()
+        {
+            // Step 1: Fetch all RSS sources from the repository
+            var rssFeeds = await _rssFeedRepository.GetAllAsync();
+            var rssFeeds2 = rssFeeds.Where(x => x.Id == 1);
+            IEnumerable<ArticleDto> articles = new List<ArticleDto>();
+            foreach (var rssFeed in rssFeeds2)
+            {
+                // Step 2: Fetch the XML data from the RSS feed URL
+                var xmlData = await FetchRssDataAsync(rssFeed.FeedUrl);
+
+                // Step 3: Parse the XML into articles
+                articles = await ParseRssToArticles(xmlData, rssFeed);
+
+                // Step 4: Add the articles to the database
+                await _articleService.AddArticlesAsync(articles);
+            }
+        }
+        private async Task<XDocument> FetchRssDataAsync(string feedUrl)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetStringAsync(feedUrl);
+                return XDocument.Parse(response);
+            }
+        }
+        private async Task<IEnumerable<ArticleDto>> ParseRssToArticles(XDocument xmlData, RssFeed rssFeed)
+        {
+            var articles = new List<ArticleDto>();
+            var items = xmlData.Descendants("item");
+
+            foreach (var item in items)
+            {
+                // Call UrlToImageConfigService to process image extraction
+                var imageUrl = await _urlToImageConfigService.GetImageUrl(item, rssFeed.Id);
+
+                // Create the Article DTO
+                var article = new ArticleDto
+                {
+                    RssFeedId = rssFeed.Id,
+                    FeedUrl = rssFeed.FeedUrl,
+                    Title = item.Element("title")?.Value,
+                    Description = StripHtmlTags(item.Element("description")?.Value),
+                    Link = item.Element("link")?.Value,
+                    Author = item.Element("author")?.Value,
+                    PubDate = item.Element("pubDate")?.Value,
+                    UrlToImage = imageUrl
+                };
+
+                articles.Add(article);
+            }
+
+            return articles;
+        }
+
+        private string StripHtmlTags(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
+            return System.Text.RegularExpressions.Regex.Replace(text, "<.*?>", string.Empty);
+        }
+        #endregion
     }
 
 }

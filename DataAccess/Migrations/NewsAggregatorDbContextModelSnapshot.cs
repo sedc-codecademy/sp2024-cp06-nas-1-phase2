@@ -43,7 +43,7 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("FeedUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Link")
                         .IsRequired()
@@ -56,26 +56,22 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SourceUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("RssFeedId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("TrustScore")
-                        .HasColumnType("float");
 
                     b.Property<string>("UrlToImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FeedUrl");
+
+                    b.HasIndex("RssFeedId");
 
                     b.ToTable("Articles");
                 });
@@ -128,14 +124,14 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RssSources");
+                    b.ToTable("RssFeeds");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Author = "author",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(2985),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8581),
                             Description = "description",
                             FeedUrl = "https://mia.mk/feed",
                             Link = "link",
@@ -149,7 +145,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             Author = "dc:creator",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3049),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8635),
                             Description = "content:encoded",
                             FeedUrl = "https://telma.com.mk/feed/",
                             Link = "link",
@@ -163,7 +159,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 3,
                             Author = "",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3052),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8640),
                             Description = "content",
                             FeedUrl = "https://admin.24.mk/api/rss.xml",
                             Link = "link",
@@ -177,7 +173,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             Author = "dc:creator",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3056),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8644),
                             Description = "description",
                             FeedUrl = "https://sitel.com.mk/rss.xml",
                             Link = "link",
@@ -191,7 +187,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             Author = "author",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3059),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8648),
                             Description = "content",
                             FeedUrl = "https://kanal5.com.mk/rss.aspx",
                             Link = "link",
@@ -227,67 +223,78 @@ namespace DataAccess.Migrations
                     b.Property<string>("Regex")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RssSourceId")
+                    b.Property<int>("RssFeedId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RssSourceId");
+                    b.HasIndex("RssFeedId");
 
-                    b.ToTable("UrlToImageConfig");
+                    b.ToTable("UrlToImageConfigs");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Attribute = "url",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3143),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8685),
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Query = "enclosure",
-                            RssSourceId = 1
+                            RssFeedId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3151),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8693),
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Query = "content:encoded",
                             Regex = "<img[^>]*src=\\\"([^\\\"]*)\\\"",
-                            RssSourceId = 2
+                            RssFeedId = 2
                         },
                         new
                         {
                             Id = 3,
                             Attribute = "src",
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3154),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8697),
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Query = "img",
-                            RssSourceId = 3
+                            RssFeedId = 3
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3158),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8700),
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Query = "description",
                             Regex = "<img[^>]*src=\\\"([^\\\"]*)\\\"",
-                            RssSourceId = 4
+                            RssFeedId = 4
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2024, 9, 21, 23, 25, 11, 564, DateTimeKind.Local).AddTicks(3161),
+                            CreatedOn = new DateTime(2024, 10, 4, 19, 15, 18, 50, DateTimeKind.Local).AddTicks(8703),
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Query = "thumbnail",
-                            RssSourceId = 5
+                            RssFeedId = 5
                         });
+                });
+
+            modelBuilder.Entity("DomainModels.Article", b =>
+                {
+                    b.HasOne("DomainModels.RssFeed", "RssFeed")
+                        .WithMany("Articles")
+                        .HasForeignKey("RssFeedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RssFeed");
                 });
 
             modelBuilder.Entity("DomainModels.UrlToImageConfig", b =>
                 {
                     b.HasOne("DomainModels.RssFeed", "RssFeed")
-                        .WithMany("UrlToImagescConfigs")
-                        .HasForeignKey("RssSourceId")
+                        .WithMany("UrlToImageConfigs")
+                        .HasForeignKey("RssFeedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -296,7 +303,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DomainModels.RssFeed", b =>
                 {
-                    b.Navigation("UrlToImagescConfigs");
+                    b.Navigation("Articles");
+
+                    b.Navigation("UrlToImageConfigs");
                 });
 #pragma warning restore 612, 618
         }
