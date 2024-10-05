@@ -12,8 +12,6 @@ namespace DTOs.RssFeed
         public string Link { get; set; }
         public string Author { get; set; }
         public string PubDate { get; set; }
-
-        // URL-to-image configuration
         public UrlToImageConfigDto UrlToImageConfig { get; set; }
     }
 }
