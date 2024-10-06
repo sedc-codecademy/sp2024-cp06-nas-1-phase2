@@ -1,8 +1,6 @@
 using Mappers;
 using Serilog;
 using Services.Helpers;
-using Services.Implementations;
-using Services.Interfaces;
 
 namespace sp2024_cp06_nas_1_phase2
 {
@@ -11,7 +9,7 @@ namespace sp2024_cp06_nas_1_phase2
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
             // Add services to the container.
             var appConfig = builder.Configuration.GetSection("AppSettings");
             builder.Services.Configure<AppSettings>(appConfig);
@@ -33,6 +31,30 @@ namespace sp2024_cp06_nas_1_phase2
                         retainedFileCountLimit: 7
                     );
             });
+            
+            /*
+            //Configure Serilog to log all levels to file, and only info &error to console
+            //Log.Logger = new LoggerConfiguration()
+            //    .MinimumLevel.Debug() // Minimum log level for the application
+            //    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning) // For ASP.NET core, log at least Warning level
+            //    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day) // Log everything to a file
+            //    .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information) // Log only Information and above to Console
+            //    .CreateLogger();
+
+            //try
+            //{
+            //    Log.Information("Starting up the application...");
+            //    CreateHostBuilder(args).Build().Run();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Log.Fatal(ex, "Application start-up failed");
+            //}
+            //finally
+            //{
+            //    Log.CloseAndFlush();
+            //}
+            */
 
             builder.Services.RegisterDbContext(appSettings.ConnectionString);
             builder.Services.RegisterRepositories();
@@ -62,5 +84,13 @@ namespace sp2024_cp06_nas_1_phase2
 
             app.Run();
         }
+
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .UseSerilog()  // Use Serilog as the logger
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Program>();
+        //        });
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using DataAccess;
 using DataAccess.Implementations;
 using DataAccess.Interfaces;
+using DomainModels;
 using Services.Implementations;
 using Services.Interfaces;
 
@@ -38,6 +39,7 @@ namespace Services.Helpers
             //services.AddTransient<ArticleBackgroundService>(); // Use AddTransient
             services.AddHostedService<ArticleBackgroundService>(); // Still register as a hosted service
 
+            services.AddTransient<ILoggerHelper, LoggerHelper<BaseClass>>();
             services.AddTransient<IApiService, ApiService>();
             services.AddTransient<IRssFeedService, RssFeedService>();
             services.AddTransient<IArticleService, ArticleService>();

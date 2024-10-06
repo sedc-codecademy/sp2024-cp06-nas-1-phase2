@@ -53,7 +53,6 @@ namespace sp2024_cp06_nas_1_phase2.Controllers
             try
             {
                 await _rssFeedService.AddRssFeedWithConfigAsync(addRssFeedDto);
-                Console.WriteLine(addRssFeedDto);
                 return Ok($"The RSS {addRssFeedDto.Source} was added to the database!");
             }
             catch (Exception ex)
@@ -67,7 +66,6 @@ namespace sp2024_cp06_nas_1_phase2.Controllers
             try
             {
                 await _rssFeedService.FetchAndProcessRssFeedsAsync();
-                //Console.WriteLine(addRssFeedDto);
                 return Ok($"The Articles were added to the database!");
             }
             catch (Exception ex)
