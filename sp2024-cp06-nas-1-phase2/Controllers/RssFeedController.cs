@@ -60,18 +60,18 @@ namespace sp2024_cp06_nas_1_phase2.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> FetchAndProcessRssFeedsAsync()
-        {
-            try
-            {
-                await _rssFeedService.FetchAndProcessRssFeedsAsync();
-                return Ok($"The Articles were added to the database!");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> FetchAndProcessRssFeedsAsync()
+        //{
+        //    try
+        //    {
+        //        await _rssFeedService.FetchAndProcessRssFeedsAsync();
+        //        return Ok($"The Articles were added to the database!");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

@@ -124,15 +124,15 @@ namespace Services.Implementations
         {
             // Step 1: Fetch all RSS sources from the repository
             var rssFeeds = await _rssFeedRepository.GetAllAsync();
-            var rssFeeds2 = rssFeeds.Where(x => x.Id == 1);
-            IEnumerable<ArticleDto> articles = new List<ArticleDto>();
-            foreach (var rssFeed in rssFeeds2)
+            //var rssFeeds2 = rssFeeds.Where(x => x.Id == 1);
+            //IEnumerable<ArticleDto> articles = new List<ArticleDto>();
+            foreach (var rssFeed in rssFeeds)
             {
                 // Step 2: Fetch the XML data from the RSS feed URL
                 var xmlData = await FetchRssDataAsync(rssFeed.FeedUrl);
 
                 // Step 3: Parse the XML into articles
-                articles = await ParseRssToArticles(xmlData, rssFeed);
+                var articles = await ParseRssToArticles(xmlData, rssFeed);
 
                 // Step 4: Add the articles to the database
                 await _articleService.AddArticlesAsync(articles);
