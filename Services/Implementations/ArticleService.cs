@@ -62,7 +62,7 @@ namespace Services.Implementations
                     if (latestArticle != null && latestArticle.Title == article.Title &&
                         latestArticle.Link == article.Link)
                     {
-                        break; // Stop comparison once a match is found
+                        break;
                     }
                     newArticles.Add(article);
                 }

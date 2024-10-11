@@ -148,6 +148,11 @@ namespace Services.Implementations
 
                     foreach (var item in items)
                     {
+                        if (item.IsEmpty || string.IsNullOrEmpty(item.Element("title")?.Value))
+                        {
+                            _logger.LogInfo($"Empty or invalid item found in feed: {rssFeed.FeedUrl}");
+                            continue;
+                        }
                         var article = new Article
                         {
                             Title = item.Element("title")?.Value!,
@@ -192,18 +197,21 @@ namespace Services.Implementations
                 response = RemoveScriptTags(response);
                 if (string.IsNullOrEmpty(response))
                 {
-                    throw new Exception();
+                    throw new Exception("The response is either null or empty.");
                 }
                 _logger.LogInfo($"Successfully fetched xml from source: {feedUrl}");
                 return response;
             }
+            catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Forbidden)
+            {
+                _logger.LogError(ex, $"403 Forbidden error fetching from {feedUrl}. Returning empty <item> tag.");
+                return "<item></item>";
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Received invalid response format; expected XML. " +
-                                     $"Error fetching from {feedUrl}");
-                Console.WriteLine("Received invalid response format; expected XML. " +
-                                  $"Error fetching from {feedUrl}");
-                throw new Exception(ex.Message, ex);
+                _logger.LogError(ex, $"Received invalid response format; expected XML. Error fetching from {feedUrl}");
+                Console.WriteLine("Received invalid response format; expected XML. Error fetching from {feedUrl}");
+                return "<item></item>";
             }
         }
         private static XElement FindElementByTagName(XElement parent, string tagName)
