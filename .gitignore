@@ -8,3 +8,6 @@
 bin/
 obj/
 .vs/
+
+# Ignore the logs
+Logs/
