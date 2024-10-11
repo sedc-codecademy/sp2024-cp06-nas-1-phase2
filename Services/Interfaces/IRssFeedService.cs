@@ -1,4 +1,5 @@
-﻿using DTOs.RssFeed;
+﻿using DTOs.Article;
+using DTOs.RssFeed;
 using System.Xml.Linq;
 
 namespace Services.Interfaces
@@ -7,11 +8,10 @@ namespace Services.Interfaces
     {
         Task<IEnumerable<RssFeedDto>> GetAllRssFeedsAsync();
         Task<RssFeedDto> GetRssFeedBySourceAsync(string source);
-        Task AddRssFeedWithConfigAsync(AddRssFeedDto addRssFeedDto);
-        Task FetchAndProcessRssFeedsAsync();
+        Task<List<ArticleDto>> FetchAndProcessRssFeedsAsync(CancellationToken cancellationToken);
         //Task<string> FetchRssFeedXmlAsync(string feedUrl);
         //Task<RssFeedDto> GetRssFeedByIdAsync(int id);
-        //Task AddRssFeedAsync(AddRssFeedDto rssFeedDto);
+        Task AddRssFeedAsync(AddRssFeedDto rssFeedDto);
         //Task UpdateRssFeedAsync(UpdateRssFeedDto rssFeedDto);
         //Task DeleteRssFeedAsync(int id);
     }

@@ -7,12 +7,22 @@ namespace DataAccess
     {
         public NewsAggregatorDbContext(DbContextOptions<NewsAggregatorDbContext> options) : base(options)
         {
-            
+            Console.WriteLine("DbContext instance created");
+        }
+        public override int SaveChanges()
+        {
+            Console.WriteLine("SaveChanges called");
+            return base.SaveChanges();
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            Console.WriteLine("SaveChangesAsync called");
+            return base.SaveChangesAsync(cancellationToken);
+        }
         public DbSet<Article> Articles { get; set; }
         public DbSet<RssFeed> RssFeeds { get; set; }
-        public DbSet<UrlToImageConfig> UrlToImageConfigs { get; set; }
+        //public DbSet<UrlToImageConfig> UrlToImageConfigs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

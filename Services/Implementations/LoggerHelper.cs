@@ -12,12 +12,12 @@ namespace Services.Implementations
         }
         public void LogInfo(string message)
         {
-            _logger.LogInformation(message);
+            _logger.LogInformation("LogInfo: {Message}", message);
         }
 
         public void LogError(Exception ex, string message)
         {
-            _logger.LogError(ex, message);
+            _logger.LogError(ex, "LogError: {Message}", message);
         }
     }
 }

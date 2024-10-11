@@ -1,6 +1,4 @@
-﻿using DTOs.UrlToImageConfig;
-
-namespace DTOs.RssFeed
+﻿namespace DTOs.RssFeed
 {
     public class AddRssFeedDto
     {
@@ -12,6 +10,5 @@ namespace DTOs.RssFeed
         public string Link { get; set; }
         public string Author { get; set; }
         public string PubDate { get; set; }
-        public UrlToImageConfigDto UrlToImageConfig { get; set; }
     }
 }

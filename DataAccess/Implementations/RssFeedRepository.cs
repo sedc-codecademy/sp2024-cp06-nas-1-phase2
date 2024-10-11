@@ -15,7 +15,7 @@ namespace DataAccess.Implementations
         {
             try
             {
-                return await _context.RssFeeds.FirstOrDefaultAsync(rs => rs.FeedUrl.Contains(source));
+                return (await _context.RssFeeds.FirstOrDefaultAsync(rs => rs.FeedUrl.Contains(source)))!;
             }
             catch (DbUpdateException dbEx)
             {

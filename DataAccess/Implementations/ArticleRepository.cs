@@ -34,33 +34,31 @@ namespace DataAccess.Implementations
                 .ToListAsync();
         }
 
-        public async Task AddRangeAsync(IEnumerable<Article> articles)
+        public async Task AddRangeAsync(IEnumerable<Article> articles, CancellationToken cancellationToken)
         {
             try
             {
-                foreach (var article in articles)
-                {
-                    await _context.Articles.AddAsync(article);
-                    await _context.SaveChangesAsync();
-                }
-                //await _context.Database.CreateExecutionStrategy().ExecuteAsync(async () =>
-                //{
-                //    await _context.Articles.AddRangeAsync(articles);
-                //    await _context.SaveChangesAsync();
-                //});
+                Console.WriteLine("Starting AddRangeAsync method");
+
+                await _context.Articles.AddRangeAsync(articles, cancellationToken);
+                Console.WriteLine("Articles added");
+
+                await _context.SaveChangesAsync(cancellationToken);
+                Console.WriteLine("Changes saved");
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"Error: {ex.Message}");
                 throw new Exception(ex.Message);
             }
         }
 
         public async Task<Article> GetLatestArticleByRssFeedIdAsync(int rssFeedId)
         {
-            return await _context.Articles
+            return (await _context.Articles
                 .Where(x => x.RssFeedId == rssFeedId)
                 .OrderByDescending(x => x.PubDate)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync())!;
         }
     }
 }

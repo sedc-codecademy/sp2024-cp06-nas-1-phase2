@@ -2,7 +2,6 @@
 using DomainModels;
 using DTOs.Article;
 using DTOs.RssFeed;
-using DTOs.UrlToImageConfig;
 
 namespace Mappers
 {
@@ -17,9 +16,6 @@ namespace Mappers
 
             //Article
             CreateMap<Article, ArticleDto>().ReverseMap();
-
-            //UrlToImageConfig
-            CreateMap<UrlToImageConfig, UrlToImageConfigDto>().ReverseMap();
         }
     }
 }

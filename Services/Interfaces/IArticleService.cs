@@ -10,6 +10,6 @@ namespace Services.Interfaces
 
         Task<IEnumerable<ArticleDto>> GetAllArticlesAsync();
         Task<IEnumerable<ArticleDto>> GetAllArticlesBySourceAsync(int rssFeedId);
-        Task AddArticlesAsync(IEnumerable<ArticleDto> addArticles);
+        Task AddArticlesAsync(IEnumerable<ArticleDto> addArticles, CancellationToken cancellationToken);
     }
 }

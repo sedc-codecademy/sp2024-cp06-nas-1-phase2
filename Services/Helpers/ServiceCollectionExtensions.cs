@@ -26,24 +26,21 @@ namespace Services.Helpers
 
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient<IRssFeedRepository, RssFeedRepository>();
-            services.AddTransient<IArticleRepository, ArticleRepository>();
-            services.AddTransient<IUrlToImageConfigRepository, UrlToImageConfigRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IRssFeedRepository, RssFeedRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
 
             return services;
         }
 
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            //services.AddTransient<ArticleBackgroundService>(); // Use AddTransient
-            services.AddHostedService<ArticleBackgroundService>(); // Still register as a hosted service
+            services.AddHostedService<ArticleBackgroundService>();
 
             services.AddTransient<ILoggerHelper, LoggerHelper<BaseClass>>();
             services.AddTransient<IApiService, ApiService>();
             services.AddTransient<IRssFeedService, RssFeedService>();
             services.AddTransient<IArticleService, ArticleService>();
-            services.AddTransient<IUrlToImageConfigService, UrlToImageConfigService>();
             services.AddTransient<IArticleBackgroundService, ArticleBackgroundService>();
 
             return services;
@@ -73,7 +70,7 @@ namespace Services.Helpers
                                 Id = "Bearer"
                             }
                         },
-                        new string[] { }
+                        Array.Empty<string>()
                     }
                 });
             });

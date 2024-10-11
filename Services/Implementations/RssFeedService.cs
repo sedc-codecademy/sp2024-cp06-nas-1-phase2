@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using AutoMapper;
 using DataAccess.Interfaces;
 using DomainModels;
@@ -11,20 +13,20 @@ namespace Services.Implementations
     public class RssFeedService : IRssFeedService
     {
         private readonly IRssFeedRepository _rssFeedRepository;
-        private readonly IUrlToImageConfigService _urlToImageConfigService;
         private readonly IArticleService _articleService;
         private readonly IMapper _mapper;
+        private readonly ILoggerHelper _logger;
 
         public RssFeedService(
             IRssFeedRepository rssFeedRepository,
-            IUrlToImageConfigService urlToImageConfigService,
             IArticleService articleService,
-            IMapper mapper)
+            IMapper mapper,
+            ILoggerHelper logger)
         {
             _rssFeedRepository = rssFeedRepository;
-            _urlToImageConfigService = urlToImageConfigService;
             _articleService = articleService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         #region GenericMethods
@@ -33,8 +35,8 @@ namespace Services.Implementations
         {
             try
             {
-                var rssSources = await _rssFeedRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<RssFeedDto>>(rssSources);
+                var rssFeeds = await _rssFeedRepository.GetAllAsync();
+                return _mapper.Map<IEnumerable<RssFeedDto>>(rssFeeds);
             }
             catch (Exception ex)
             {
@@ -46,51 +48,30 @@ namespace Services.Implementations
             try
             {
                 var feed = await _rssFeedRepository.GetBySourceAsync(source);
-                if (source == null)
-                {
-                    throw new Exception();
-                }
-
-                return _mapper.Map<RssFeedDto>(feed);
+                return feed == null ? throw new Exception() : _mapper.Map<RssFeedDto>(feed);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
-        public async Task AddRssFeedWithConfigAsync(AddRssFeedDto addRssFeedDto)
+        public async Task AddRssFeedAsync(AddRssFeedDto rssFeedDto)
         {
-            var rssFeed = _mapper.Map<RssFeed>(addRssFeedDto);
-            await _rssFeedRepository.AddAsync(rssFeed);
-
-            if (addRssFeedDto.UrlToImageConfig != null)
+            try
             {
-                var urlConfig = addRssFeedDto.UrlToImageConfig;//_mapper.Map<UrlToImageConfig>(addRssFeedDto.UrlToImageConfig);
-                urlConfig.RssFeedId = rssFeed.Id;
-                await _urlToImageConfigService.AddUrlToImageConfigAsync(urlConfig);
+                var rssFeed = _mapper.Map<RssFeed>(rssFeedDto);
+                await _rssFeedRepository.AddAsync(rssFeed);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
-
-        //public async Task AddRssFeedAsync(AddRssFeedDto rssFeedDto)
-        //{
-        //    try
-        //    {
-        //        var addRssFeed = _mapper.Map<RssFeed>(rssFeedDto);
-
-        //        await _rssFeedRepository.AddAsync(addRssFeed);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
         public async Task UpdateRssFeedAsync(UpdateRssFeedDto rssFeedDto)
         {
             try
             {
                 var rssSource = _mapper.Map<RssFeed>(rssFeedDto);
-
                 await _rssFeedRepository.UpdateAsync(rssSource);
             }
             catch (Exception ex)
@@ -103,12 +84,10 @@ namespace Services.Implementations
             try
             {
                 var rssSource = _rssFeedRepository.GetByIdAsync(id).ToString();
-                if (rssSource == null)
-                {
+                if (rssSource != null)
+                    await _rssFeedRepository.DeleteAsync(id);
+                else
                     throw new Exception();
-                }
-
-                await _rssFeedRepository.DeleteAsync(id);
             }
             catch (Exception ex)
             {
@@ -116,69 +95,252 @@ namespace Services.Implementations
             }
         }
 
+        public async Task<List<ArticleDto>> FetchAndProcessRssFeedsAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                var rssFeeds = await _rssFeedRepository.GetAllAsync();
+                //var rssFeeds = rssFeeds1.Where(x => x.Id == 5);
+                var articles = new List<Article>();
+
+                foreach (var rssFeed in rssFeeds)
+                {
+                    /*
+                    var image = new List<string>();
+                    if (!string.IsNullOrEmpty(rssFeed.Query))
+                    {
+                        image.Add(rssFeed.Query);
+                    }
+
+                    if (!string.IsNullOrEmpty(rssFeed.Attribute))
+                    {
+                        image.Add(rssFeed.Attribute);
+                    }
+
+                    if (!string.IsNullOrEmpty(rssFeed.Regex))
+                    {
+                        image.Add(rssFeed.Regex);
+                    }
+                    */
+                    var image = new List<string>
+                    {
+                        rssFeed.Query,
+                        rssFeed.Attribute!,
+                        rssFeed.Regex!
+                    }.Where(item => !string.IsNullOrEmpty(item)).ToList();
+
+                    var xmlContent = await FetchRssXmlAsync(rssFeed.FeedUrl);
+                    var items = ParseRssItems(xmlContent);
+
+                    /*
+                    articles.AddRange(items.Select(item => new Article
+                    {
+                        Title = item.Element("title")?.Value!,
+                        Description = StripHtmlTags(item.Element("description")?.Value!),
+                        Link = item.Element("link")?.Value!,
+                        Author = item.Element("author")?.Value!,
+                        PubDate = item.Element("pubDate")?.Value ?? DateTime.Now.ToString(CultureInfo.CurrentCulture),
+                        FeedUrl = rssFeed.FeedUrl,
+                        RssFeedId = rssFeed.Id,
+                        UrlToImage = GetImageUrl(item, image)
+                    }));
+                    */
+
+                    foreach (var item in items)
+                    {
+                        var article = new Article
+                        {
+                            Title = item.Element("title")?.Value!,
+                            Description = StripHtmlTags(item.Element("description")?.Value!),
+                            Link = item.Element("link")?.Value!,
+                            Author = item.Element("author")?.Value!,
+                            PubDate = item.Element("pubDate")?.Value ??
+                                      DateTime.Now.ToString(CultureInfo.CurrentCulture),
+                            FeedUrl = rssFeed.FeedUrl,
+                            RssFeedId = rssFeed.Id,
+                            UrlToImage = GetImageUrl(item, image) // Extract image URL based on the RssFeed's properties
+                        };
+
+                        articles.Add(article);
+                    }
+                }
+
+                var articlesDto = articles.Select(article => _mapper.Map<ArticleDto>(article)).ToList();
+                await _articleService.AddArticlesAsync(articlesDto, cancellationToken);
+                return articlesDto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
         #endregion
 
-        #region ProcessingXML
+        #region PrivateMethods
 
-        public async Task FetchAndProcessRssFeedsAsync()
+        private async Task<string> FetchRssXmlAsync(string feedUrl)
         {
-            // Step 1: Fetch all RSS sources from the repository
-            var rssFeeds = await _rssFeedRepository.GetAllAsync();
-            //var rssFeeds2 = rssFeeds.Where(x => x.Id == 1);
-            //IEnumerable<ArticleDto> articles = new List<ArticleDto>();
-            foreach (var rssFeed in rssFeeds)
+            try
             {
-                // Step 2: Fetch the XML data from the RSS feed URL
-                var xmlData = await FetchRssDataAsync(rssFeed.FeedUrl);
+                using var client = new HttpClient();
+                //client.DefaultRequestHeaders.Add("User-Agent", "NewsAggregator");
+                client.DefaultRequestHeaders.Add("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0");
+                var response = await client.GetStringAsync(feedUrl);
 
-                // Step 3: Parse the XML into articles
-                var articles = await ParseRssToArticles(xmlData, rssFeed);
-
-                // Step 4: Add the articles to the database
-                await _articleService.AddArticlesAsync(articles);
-            }
-        }
-        private async Task<XDocument> FetchRssDataAsync(string feedUrl)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                var response = await httpClient.GetStringAsync(feedUrl);
-                return XDocument.Parse(response);
-            }
-        }
-        private async Task<IEnumerable<ArticleDto>> ParseRssToArticles(XDocument xmlData, RssFeed rssFeed)
-        {
-            var articles = new List<ArticleDto>();
-            var items = xmlData.Descendants("item");
-
-            foreach (var item in items)
-            {
-                // Call UrlToImageConfigService to process image extraction
-                var imageUrl = await _urlToImageConfigService.GetImageUrl(item, rssFeed.Id);
-
-                // Create the Article DTO
-                var article = new ArticleDto
+                response = RemoveScriptTags(response);
+                if (string.IsNullOrEmpty(response))
                 {
-                    RssFeedId = rssFeed.Id,
-                    FeedUrl = rssFeed.FeedUrl,
-                    Title = item.Element("title")?.Value,
-                    Description = StripHtmlTags(item.Element("description")?.Value),
-                    Link = item.Element("link")?.Value,
-                    Author = item.Element("author")?.Value,
-                    PubDate = item.Element("pubDate")?.Value,
-                    UrlToImage = imageUrl
-                };
+                    throw new Exception();
+                }
+                _logger.LogInfo($"Successfully fetched xml from source: {feedUrl}");
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Received invalid response format; expected XML. " +
+                                     $"Error fetching from {feedUrl}");
+                Console.WriteLine("Received invalid response format; expected XML. " +
+                                  $"Error fetching from {feedUrl}");
+                throw new Exception(ex.Message, ex);
+            }
+        }
+        private static XElement FindElementByTagName(XElement parent, string tagName)
+        {
+            if (tagName.Contains(':'))
+            {
+                var parts = tagName.Split(':');
+                var prefix = parts[0];
+                var localName = parts[1];
+                var ns = parent.GetNamespaceOfPrefix(prefix);
+                return parent.Descendants(ns + localName).FirstOrDefault();
+            }
+            else
+            {
+                return parent.Descendants(tagName).FirstOrDefault() ?? throw new InvalidOperationException();
+            }
+        }
+        private static IEnumerable<XElement> ParseRssItems(string xmlContent)
+        {
+            try
+            {
+                var xDoc = XDocument.Parse(xmlContent);
+                return xDoc.Descendants("item").ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+        private static string GetImageUrl(XElement item, IReadOnlyList<string> imageTags)
+        {
+            try
+            {
+                if (imageTags[1] != "")
+                {
+                    if (!IsValidRegex(imageTags[1]))
+                    {
+                        // Scenario 2: Single XML tag with attribute
+                        var xmlTag = imageTags[0].Trim();
 
-                articles.Add(article);
+                        var xmlTagElement = FindElementByTagName(item, xmlTag);
+
+                        if (xmlTagElement == null) return string.Empty;
+                        var xmlAttribute = imageTags[1].Trim(); // Get the attribute name dynamically
+                        var attributeValue = xmlTagElement.Attribute(xmlAttribute)?.Value ?? xmlTagElement.Value;
+
+                        if (!string.IsNullOrEmpty(attributeValue))
+                        {
+                            return attributeValue;
+                        }
+                    }
+                    else // if (imageTags.Count == 2 && !string.IsNullOrEmpty(imageTags[1].Trim()))
+                    {
+                        // Scenario 3: Tag with regex
+                        var xmlTag = imageTags[0].Trim();
+                        var regexPattern = imageTags[1].Trim();
+
+                        var xmlTagElement = FindElementByTagName(item, xmlTag);
+
+                        if (xmlTagElement == null) return string.Empty;
+                        var attributeValue = xmlTagElement.Attribute("url")?.Value ?? xmlTagElement.Value;
+
+                        if (string.IsNullOrEmpty(attributeValue)) return string.Empty;
+                        var regex = new Regex(regexPattern, RegexOptions.IgnoreCase);
+                        var match = regex.Match(attributeValue);
+
+                        if (match.Groups.Count > 1 && match.Success)
+                        {
+                            return match.Groups[1].Value;
+                        }
+                    }
+                }
+                else // if (imageTags.Count == 1)
+                {
+                    // Scenario 1: One XML tag
+                    var xmlTag = imageTags[0].Trim();
+                    //var xmlTag2 = imageTags[1].Trim();
+
+                    var xmlTagElement = FindElementByTagName(item, xmlTag);
+                    //var xmlTagElement2 = FindElementByTagName(parent, xmlTag2);
+
+                    if (xmlTagElement != null)// && xmlTagElement2 != null)
+                    {
+                        return xmlTagElement.Value;// ?? xmlTagElement2.Value;
+                    }
+                }
+
+                return string.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+        private static string StripHtmlTags(string text)
+        {
+            return string.IsNullOrEmpty(text) ? string.Empty :
+                Regex.Replace(text, "<.*?>", string.Empty);
+        }
+        private static string RemoveScriptTags(string input)
+        {
+            return string.IsNullOrEmpty(input) ? input :
+                // Regex to match <script>...</script>
+                Regex.Replace(input, "<script.*?>.*?</script>", string.Empty, RegexOptions.Singleline);
+        }
+        private static bool IsValidRegex(string pattern)
+        {
+            if (string.IsNullOrWhiteSpace(pattern))
+            {
+                return false;
             }
 
-            return articles;
-        }
+            // Check if the pattern contains typical regex metacharacters
+            if (!ContainsRegexMetaCharacters(pattern))
+            {
+                return false;
+            }
 
-        private string StripHtmlTags(string text)
+            try
+            {
+                // Try to create a Regex object from the pattern
+                Regex.Match(string.Empty, pattern);
+            }
+            catch (ArgumentException)
+            {
+                // If an ArgumentException is thrown, the pattern is not a valid regex
+                return false;
+            }
+
+            return true;
+        }
+        private static bool ContainsRegexMetaCharacters(string pattern)
         {
-            if (string.IsNullOrEmpty(text)) return string.Empty;
-            return System.Text.RegularExpressions.Regex.Replace(text, "<.*?>", string.Empty);
+            // List of common regex metacharacters
+            string[] regexMetaCharacters = { ".", "^", "$", "*", "+", "?", "(", ")", "[", "]", "{", "}", "\\", "|" };
+
+            return regexMetaCharacters.Any(pattern.Contains);
         }
         #endregion
     }

@@ -7,19 +7,19 @@ namespace DataAccess.Implementations
     public class Repository<T> : IRepository<T> where T : BaseClass
     {
         private readonly NewsAggregatorDbContext _context;
-        private DbSet<T> table = null;
+        private readonly DbSet<T> _table;
 
         public Repository(NewsAggregatorDbContext context)
         {
             _context = context;
-            table = context.Set<T>();
+            _table = context.Set<T>();
         }
         
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             try
             {
-                return await table.ToListAsync();
+                return await _table.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -31,11 +31,11 @@ namespace DataAccess.Implementations
         {
             try
             {
-                if (id < 0 || id > table.Count())
+                if (id < 0 || id > _table.Count())
                 {
                     throw new KeyNotFoundException($"Entity with id: {id} is not found.");
                 }
-                return await table.FindAsync(id);
+                return (await _table.FindAsync(id))!;
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace DataAccess.Implementations
         {
             try
             {
-                await table.AddAsync(entity);
+                await _table.AddAsync(entity);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -59,7 +59,7 @@ namespace DataAccess.Implementations
         {
             try
             {
-                table.Update(entity);
+                _table.Update(entity);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -72,14 +72,16 @@ namespace DataAccess.Implementations
         {
             try
             {
-                var entity = await table.FindAsync(id);
-                if (entity == null)
+                var entity = await _table.FindAsync(id);
+                if (entity != null)
+                {
+                    _table.Remove(entity);
+                    await _context.SaveChangesAsync();
+                }
+                else
                 {
                     throw new KeyNotFoundException($"Entity with id: {id} is not found.");
                 }
-
-                table.Remove(entity);
-                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

@@ -12,7 +12,9 @@ namespace Services.Implementations
         private readonly IMapper _mapper;
         private readonly ILoggerHelper _logger;
 
-        public ArticleService(IArticleRepository articleRepository, IMapper mapper, ILoggerHelper logger)
+        public ArticleService(IArticleRepository articleRepository,
+            IMapper mapper,
+            ILoggerHelper logger)
         {
             _articleRepository = articleRepository;
             _mapper = mapper;
@@ -31,7 +33,6 @@ namespace Services.Implementations
                 throw new Exception("Error fetching articles.", ex);
             }
         }
-
         public async Task<IEnumerable<ArticleDto>> GetAllArticlesBySourceAsync(int rssFeedId)
         {
             try
@@ -47,8 +48,7 @@ namespace Services.Implementations
                 throw new Exception("Error fetching articles by source.", ex);
             }
         }
-
-        public async Task AddArticlesAsync(IEnumerable<ArticleDto> addArticles)
+        public async Task AddArticlesAsync(IEnumerable<ArticleDto> addArticles, CancellationToken cancellationToken)
         {
             try
             {
@@ -64,19 +64,26 @@ namespace Services.Implementations
                     {
                         break; // Stop comparison once a match is found
                     }
-
                     newArticles.Add(article);
                 }
 
                 if (newArticles.Any())
                 {
                     newArticles.Reverse();
-                    await _articleRepository.AddRangeAsync(newArticles);
-                    
+                    await _articleRepository.AddRangeAsync(newArticles, cancellationToken);
+                    _logger.LogInfo($"Added {newArticles.Count} articles from " +
+                                    $"{newArticles.Select(x => x.RssFeed.Source)}");
+                }
+                else
+                {
+                    _logger.LogInfo($"No new articles from" +
+                                    $"{newArticles.Select(x => x.RssFeed.Source)}");
+
                 }
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Cannot add articles.");
                 throw new Exception("Error adding articles.", ex);
             }
         }
