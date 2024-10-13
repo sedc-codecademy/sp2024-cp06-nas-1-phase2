@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(NewsAggregatorDbContext))]
-    partial class NewsAggregatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012231002_before_DateParser")]
+    partial class before_DateParser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,7 +140,7 @@ namespace DataAccess.Migrations
                             Id = 1,
                             Attribute = "url",
                             Author = "author",
-                            CreatedOn = new DateTime(2024, 10, 13, 2, 47, 14, 149, DateTimeKind.Local).AddTicks(1891),
+                            CreatedOn = new DateTime(2024, 10, 13, 1, 10, 1, 616, DateTimeKind.Local).AddTicks(4774),
                             Description = "description",
                             FeedUrl = "https://mia.mk/feed",
                             Link = "link",
@@ -153,7 +155,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             Author = "dc:creator",
-                            CreatedOn = new DateTime(2024, 10, 13, 2, 47, 14, 149, DateTimeKind.Local).AddTicks(1925),
+                            CreatedOn = new DateTime(2024, 10, 13, 1, 10, 1, 616, DateTimeKind.Local).AddTicks(4811),
                             Description = "content:encoded",
                             FeedUrl = "https://telma.com.mk/feed/",
                             Link = "link",
@@ -170,7 +172,7 @@ namespace DataAccess.Migrations
                             Id = 3,
                             Attribute = "src",
                             Author = "",
-                            CreatedOn = new DateTime(2024, 10, 13, 2, 47, 14, 149, DateTimeKind.Local).AddTicks(1929),
+                            CreatedOn = new DateTime(2024, 10, 13, 1, 10, 1, 616, DateTimeKind.Local).AddTicks(4814),
                             Description = "content",
                             FeedUrl = "https://admin.24.mk/api/rss.xml",
                             Link = "link",
@@ -185,7 +187,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             Author = "dc:creator",
-                            CreatedOn = new DateTime(2024, 10, 13, 2, 47, 14, 149, DateTimeKind.Local).AddTicks(1932),
+                            CreatedOn = new DateTime(2024, 10, 13, 1, 10, 1, 616, DateTimeKind.Local).AddTicks(4817),
                             Description = "description",
                             FeedUrl = "https://sitel.com.mk/rss.xml",
                             Link = "link",
@@ -201,7 +203,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             Author = "author",
-                            CreatedOn = new DateTime(2024, 10, 13, 2, 47, 14, 149, DateTimeKind.Local).AddTicks(1935),
+                            CreatedOn = new DateTime(2024, 10, 13, 1, 10, 1, 616, DateTimeKind.Local).AddTicks(4819),
                             Description = "content",
                             FeedUrl = "https://kanal5.com.mk/rss.aspx",
                             Link = "link",

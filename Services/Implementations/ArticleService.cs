@@ -2,6 +2,7 @@
 using DataAccess.Interfaces;
 using DomainModels;
 using DTOs.Article;
+using Services.Helpers;
 using Services.Interfaces;
 
 namespace Services.Implementations
@@ -21,18 +22,16 @@ namespace Services.Implementations
             _logger = logger;
         }
 
-        public async Task<IEnumerable<ArticleDto>> GetAllArticlesAsync()
+        public async Task<PaginatedResult<ArticleDto>> GetPagedArticlesAsync(int pageNumber, int pageSize)
         {
-            try
-            {
-                var articles = await _articleRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<ArticleDto>>(articles);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error fetching articles.", ex);
-            }
+            var totalCount = await _articleRepository.GetTotalCountAsync(); // Method to get total articles count
+            var articles = await _articleRepository.GetPaginatedAsync(pageNumber, pageSize);
+
+            var articleDtos = articles.Select(article => _mapper.Map<ArticleDto>(article));
+
+            return new PaginatedResult<ArticleDto>(articleDtos, totalCount, pageNumber, pageSize);
         }
+
         public async Task<IEnumerable<ArticleDto>> GetAllArticlesBySourceAsync(int rssFeedId)
         {
             try
@@ -87,6 +86,19 @@ namespace Services.Implementations
                 throw new Exception("Error adding articles.", ex);
             }
         }
+        public async Task<IEnumerable<ArticleDto>> GetPagedArticlesBySourceAsync(int rssFeedId, int pageNumber, int pageSize)
+        {
+            var articles = await _articleRepository.GetPagedArticlesByRssSourceIdAsync(rssFeedId, pageNumber, pageSize);
 
+            // Convert to DTOs if necessary
+            return articles.Select(a => new ArticleDto
+            {
+                // Map properties from Article to ArticleDto
+                Id = a.Id,
+                Title = a.Title,
+                Link = a.Link,
+                // Add other properties as needed
+            });
+        }
     }
 }

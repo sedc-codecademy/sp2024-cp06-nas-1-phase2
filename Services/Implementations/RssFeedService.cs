@@ -7,6 +7,7 @@ using DomainModels;
 using DTOs.Article;
 using DTOs.RssFeed;
 using Services.Interfaces;
+using Shared.Modules;
 
 namespace Services.Implementations
 {
@@ -153,14 +154,17 @@ namespace Services.Implementations
                             _logger.LogInfo($"Empty or invalid item found in feed: {rssFeed.FeedUrl}");
                             continue;
                         }
+
+                        var pubDateString = item.Element("pubDate")?.Value;
+                        var pubDate = DateParser.ParseDate(pubDateString) ?? DateTime.Now; // Use current date if parsing fails
+
                         var article = new Article
                         {
                             Title = item.Element("title")?.Value!,
                             Description = StripHtmlTags(item.Element("description")?.Value!),
                             Link = item.Element("link")?.Value!,
                             Author = item.Element("author")?.Value!,
-                            PubDate = item.Element("pubDate")?.Value ??
-                                      DateTime.Now.ToString(CultureInfo.CurrentCulture),
+                            PubDate = pubDate.ToString("dd-MM-yyyy HH:mm", CultureInfo.CurrentCulture),
                             FeedUrl = rssFeed.FeedUrl,
                             RssFeedId = rssFeed.Id,
                             UrlToImage = GetImageUrl(item, image) // Extract image URL based on the RssFeed's properties
