@@ -11,3 +11,6 @@ obj/
 
 # Ignore the logs
 Logs/
+.vs/.vs
+package-lock.json
+.vscode
